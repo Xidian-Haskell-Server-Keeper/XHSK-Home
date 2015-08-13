@@ -1,0 +1,34 @@
+name:                XHSK-Home
+version:             0.0.1
+synopsis:            Xidian Hackage Server Keeper
+homepage:            https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home
+license:             BSD3
+author:              XHSK
+maintainer:          qinka@live.com
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.8
+
+executable           XHSK-Home.Bin
+  main-is:             Main.hs
+  -- other-modules:       
+  build-depends:       base 
+                     , wai
+                     , warp
+                     , http-types
+                     , resourcet
+                     , scotty
+                     , text
+                     , bytestring
+                     , blaze-html
+                     , persistent 
+                     , persistent-template
+                     , persistent-sqlite 
+                     --, persistent-postgresql 
+                     , monad-logger
+                     , heroku
+                     , transformers
+                     , wai-middleware-static
+                     , wai-extra
+                     , time
+  hs-source-dirs:    src
