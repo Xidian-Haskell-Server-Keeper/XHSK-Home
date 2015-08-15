@@ -11,8 +11,8 @@ cabal-version:       >=1.8
 
 executable           XHSK-Home.Bin
   main-is:             Main.hs
-  -- other-modules:       
-  build-depends:       base 
+  -- other-modules:
+  build-depends:       base
                      , wai
                      , warp
                      , http-types
@@ -21,14 +21,16 @@ executable           XHSK-Home.Bin
                      , text
                      , bytestring
                      , blaze-html
-                     , persistent 
+                     , blaze-markup
+                     , persistent
                      , persistent-template
-                     , persistent-sqlite 
-                     --, persistent-postgresql 
+                     , persistent-sqlite
+                     --, persistent-postgresql
                      , monad-logger
                      , heroku
                      , transformers
                      , wai-middleware-static
                      , wai-extra
                      , time
+                     , clay
   hs-source-dirs:    src
