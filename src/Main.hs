@@ -5,9 +5,13 @@ module Main where
 import Web.Scotty
 
 import Pages.Home
+import Pages.Null --404
 
 main = scotty 3000 $ do
 	get "/"  homePage
+	get "/404" nullPage
+	notFound $ nullPage
+
 
 
 {-

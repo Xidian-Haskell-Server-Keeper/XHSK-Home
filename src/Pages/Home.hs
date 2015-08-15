@@ -1,15 +1,17 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Pages.Home where
+module Pages.Home (
+homePage
+) where
 import Prelude hiding (div,head)
 import Web.Scotty(ActionM,html)
 import Text.Blaze.Html5
-  (body,h1,br,p,div,head,title,h2,hr,b,h3,a)
-import Text.Blaze.Html
+  (body,h1,br,p,div,head,title,h2,hr,b,h3,a,ul,li)
+import Text.Blaze.Html((!))
 import Text.Blaze.Html.Renderer.Text(renderHtml)
-import Text.Blaze.Html5.Attributes(style,href)
+import Text.Blaze.Html5.Attributes(style,href,name)
 import Text.Blaze.Html4.Transitional.Attributes (align)
-import Utils
+import Utils(blaze)
 
 
 homePage :: ActionM ()
@@ -21,9 +23,15 @@ homePage = blaze $ do
     h2 ! align "center" $ "XHSK-Home"
     hr
     hr
-    h3 "导航"
+    h3 $ a ! name "guide" $ "导航"
+    div $ do
+      ul $ do
+        li $ a ! href "#guide" $ "导航"
+        li $ a ! href "#info" $  "简介"
+        li $ a ! href "#hackage" $ "Hackage"
+        li $ a ! href "#about" $ "其他"
     hr
-    h3 "简介"
+    h3 $ a ! name "info" $  "简介"
     div $ do
       p $  do
         "XHSK 是 Xidian Haskell Server Keeper 的简写。"
@@ -35,9 +43,9 @@ homePage = blaze $ do
         a ! href "mailto:qinka@live.com" $ "李约瀚"
         "。"
     hr
-    h3 "Hackage"
+    h3 $ a ! name "hackage" $"Hackage"
     hr
-    h3 "其他"
+    h3 $ a ! name "about" $"其他"
     div $ do
       "Copyright (C) 2015 XHSK"
       p $ do

@@ -1,4 +1,7 @@
-module Utils where
+module Utils (
+pet,
+blaze
+)where
 
 import           Text.Blaze.Html.Renderer.Text (renderHtml)
 import           Text.Blaze.Html5              (Html)
