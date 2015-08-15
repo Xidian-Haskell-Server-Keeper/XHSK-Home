@@ -20,6 +20,7 @@ homePage = blaze $ do
     h1 ! align "center" $ "西电Hackage镜像站维护组主页"
     h2 ! align "center" $ "XHSK-Home"
     hr
+    hr
     h3 "导航"
     hr
     h3 "简介"
@@ -44,7 +45,7 @@ homePage = blaze $ do
       p $ do
         "这个网站用Haskell编写。"
       p $ do
-        "网站代码依托关于GitHub"
+        "网站代码依托关于GitHub  "
         a ! href "https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home" $
-          "   Repo : XHSK-Home "
+          "Repo : XHSK-Home"
         "。"
