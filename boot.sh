@@ -11,16 +11,18 @@
 ##########
 function cabal_install ()
 {
-  echo "XHSK-Home 编译"
+  cd ..
+  printf "XHSK-Home 编译\n"
   CIOP=$( cabal install . | grep "Installed XHSK-Home" |cat )
   if [ -n "$CIOP" ]
     then
-      echo "编译完成"
+      printf "编译完成"
       return 1
     else
-      echo "编译失败"
+      printf "编译失败"
       return 0
     fi
+  cd ./XHSK-Home
 }
 
 function git_pull ()
@@ -28,10 +30,10 @@ function git_pull ()
   GPOUTPUT=$( git pull origin )
   if [ -n "$GPOUTPUT" ]
     then
-    echo "同步成功"
+    printf "同步成功"
     return 1
   else
-    echo "同步失败"
+    printf "同步失败"
     return 0
   fi
 }
@@ -49,7 +51,7 @@ function bin_kill()
 
 function  doStart ()
 {
-  echo "start"
+  printf "start"
   RTa=$(git_pull)
   if [ 0 == RTa ]
     then
@@ -69,7 +71,7 @@ function  doStart ()
 
 function doStop ()
 {
-  echo "stop"
+  printf "stop"
   RTc=bin_kill
   if [ 0 == RTc ]
     then
@@ -79,7 +81,7 @@ function doStop ()
 
 function doRestart ()
 {
-  echo "restart"
+  printf "restart"
   RTa=git_pull
   if [ 0 == RTa ]
     then
