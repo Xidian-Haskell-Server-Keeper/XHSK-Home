@@ -64,5 +64,51 @@ function bin_kill()
 function  doStart ()
 {
   RTa=git_pull
-  if 
+  if [0 -eq RTa]
+    then 
+      return 0
+  fi
+  RTb=cabal_install
+  if [0 -eq RTb]
+    then
+      return 0
+  fi
+  RTd=bin_run
+  if [0 -eq RTd]
+    then
+       return 0
+  fi
+}
+
+function doStop ()
+{
+  RTc=bin_kill
+  if [0 -eq RTc]
+    then
+       return 0
+  fi
+}
+
+function doRestart ()
+{
+  RTa=git_pull
+  if [0 -eq RTa]
+    then 
+      return 0
+  fi
+  RTb=cabal_install
+  if [0 -eq RTb]
+    then
+      return 0
+  fi
+  RTc=bin_kill
+  if [0 -eq RTc]
+    then
+       return 0
+  fi
+  RTd=bin_run
+  if [0 -eq RTd]
+    then
+       return 0
+  fi
 }
