@@ -12,7 +12,7 @@
 function cabal_install ()
 {
   echo "XHSK-Home 编译"
-  CIOP=$( cabal install XHSK-Home/ | grep "XHSK-Home" Install* |cat )
+  CIOP=$( cabal install XHSK-Home/ | grep "Installed XHSK-Home" |cat )
   if [ -n "$CIOP" ]
     then
       echo "编译完成"
