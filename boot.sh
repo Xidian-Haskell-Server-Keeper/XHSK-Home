@@ -50,17 +50,17 @@ function bin_kill()
 function  doStart ()
 {
   echo "start"
-  RTa=git_pull
+  RTa=$(git_pull)
   if [ 0 == RTa ]
     then
       return 0
   fi
-  RTb=cabal_install
+  RTb=$(cabal_install)
   if [ 0 == RTb ]
     then
       return 0
   fi
-  RTd=bin_run
+  RTd=$(bin_run)
   if [ 0 == RTd ]
     then
        return 0
