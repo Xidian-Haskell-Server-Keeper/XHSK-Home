@@ -23,10 +23,14 @@ homePage = blaze $ do
     h2 ! align "center" $ "XHSK-Home"
     hr
     hr
-    h3 $ a ! name "guide" $ "导航"
+    h3 "导航"
+    div $ do
+      a ! href "/" $ "首页"
+    hr
+    h3 $ a ! name "guide" $ "目录"
     div $ do
       ul $ do
-        li $ a ! href "#guide" $ "导航"
+        li $ a ! href "#guide" $ "目录"
         li $ a ! href "#info" $  "简介"
         li $ a ! href "#hackage" $ "Hackage"
         li $ a ! href "#about" $ "其他"
