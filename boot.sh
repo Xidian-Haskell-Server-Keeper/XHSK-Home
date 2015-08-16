@@ -12,7 +12,7 @@
 function cabal_install ()
 {
   echo "XHSK-Home 编译"
-  CIOP=$( cabal install XHSK-Home/ | grep "Installed XHSK-Home" |cat )
+  CIOP=$( cabal install . | grep "Installed XHSK-Home" |cat )
   if [ -n "$CIOP" ]
     then
       echo "编译完成"
@@ -38,7 +38,7 @@ function git_pull ()
 
 function bin_run()
 {
-  nothing=$( .cabal-sandbox/bin/XHSK-Home.Bin & )
+  nothing=$( ../.cabal-sandbox/bin/XHSK-Home.Bin & )
 }
 
 function bin_kill()
