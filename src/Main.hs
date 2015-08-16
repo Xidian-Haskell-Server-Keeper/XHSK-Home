@@ -7,10 +7,13 @@ import Web.Scotty
 import Pages.Home
 import Pages.Null --404
 
-main = scotty 3000 $ do
-	get "/"  homePage
-	get "/404" nullPage
-	notFound $ nullPage
+main = do
+	putStrLn "XHSK-Home begin!"
+	scotty 3000 $ do
+		get "/"  homePage
+		get "/404" nullPage
+		notFound $ nullPage
+	putStrLn "XHSK-Home end !"
 
 
 
