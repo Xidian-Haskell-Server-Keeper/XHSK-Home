@@ -6,6 +6,25 @@
 ##
 ###############################################################################
 
+if [-n $1]
+  then
+    case $1 in
+      start) doStart
+      stop) doStop
+      restart) doRestart
+    esac
+    exit
+  else
+    echo "XHSK-Home-Website维护工具"
+    echo "\tstart 开启"
+    echo "\tstop 停止"
+    echo "\trestart 更新重启"
+    exit
+fi
+
+##########
+#function#
+##########
 function cabal_install ()
 {
   echo "XHSK-Home 编译"
@@ -21,17 +40,28 @@ function cabal_install ()
 
 function git_pull ()
 {
-  echo "Git Pull"
-
-}
-
-function isUPtpDATE ()
-{
-  GPOUTPUT=$(git pull origin | grep "Already up-to-date.")
+  GPOUTPUT=$(git pull origin)
   if [-n "$GPOUTPUT"]
     then
-    echo $GPOUTPUT
+    echo "同步成功"
     return 1
   else
-    echo 
+    echo "同步失败"
+    return 0
+}
+
+function bin_run()
+{
+  nothing=$(.cabal-sandbox/bin/XHSK-Home.Bin) &
+}
+
+function bin_kill()
+{
+  killid=$(pgrep XHSK-Home.Bin)
+  kill -9 $killid
+}
+
+function  doStart ()
+{
+  
 }
