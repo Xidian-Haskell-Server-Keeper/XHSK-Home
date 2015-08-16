@@ -6,22 +6,6 @@
 ##
 ###############################################################################
 
-if [ -n $1 ]
-  then
-    case $1 in
-      start) doStart;;
-      stop) doStop;;
-      restart) doRestart;;
-    esac
-    exit
-  else
-    printf "XHSK-Home-Website维护工具\n "
-    printf "\tstart 开启\n"
-    printf "\tstop 停止\n"
-    printf "\trestart 更新重启\n"
-    exit
-fi
-
 ##########
 #function#
 ##########
@@ -65,7 +49,7 @@ function  doStart ()
 {
   RTa=git_pull
   if [0 -eq RTa]
-    then 
+    then
       return 0
   fi
   RTb=cabal_install
@@ -93,7 +77,7 @@ function doRestart ()
 {
   RTa=git_pull
   if [0 -eq RTa]
-    then 
+    then
       return 0
   fi
   RTb=cabal_install
@@ -112,3 +96,20 @@ function doRestart ()
        return 0
   fi
 }
+
+
+if [ -n $1 ]
+  then
+    case $1 in
+      start) doStart;;
+      stop) doStop;;
+      restart) doRestart;;
+    esac
+    exit
+  else
+    printf "XHSK-Home-Website维护工具\n "
+    printf "\tstart 开启\n"
+    printf "\tstop 停止\n"
+    printf "\trestart 更新重启\n"
+    exit
+fi
