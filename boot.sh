@@ -46,7 +46,8 @@ function bin_run()
 
 function bin_kill()
 {
-  killid=$(pgrep XHSK-Home.Bin)
+  printf "dd"
+  killid=$( pgrep XHSK-Home.Bin )
   kill -9 $killid
   return 1
 }
@@ -74,7 +75,7 @@ function  doStart ()
 function doStop ()
 {
   printf "stop"
-  RTc=bin_kill
+  RTc=$(bin_kill)
   if [ 0 == RTc ]
     then
        return 0
@@ -84,22 +85,22 @@ function doStop ()
 function doRestart ()
 {
   printf "restart"
-  RTa=git_pull
+  RTa=$(git_pull)
   if [ 0 == RTa ]
     then
       return 0
   fi
-  RTb=cabal_install
+  RTb=$(cabal_install)
   if [ 0 == RTb ]
     then
       return 0
   fi
-  RTc=bin_kill
+  RTc=$(bin_kill)
   if [ 0 == RTc ]
     then
        return 0
   fi
-  RTd=bin_run
+  RTd=$(bin_run)
   if [ 0 == RTd ]
     then
        return 0
