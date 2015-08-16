@@ -9,16 +9,16 @@
 if [-n $1]
   then
     case $1 in
-      start) doStart
-      stop) doStop
-      restart) doRestart
+      start) doStart;;
+      stop) doStop;;
+      restart) doRestart;;
     esac
     exit
   else
-    echo "XHSK-Home-Website维护工具"
-    echo "\tstart 开启"
-    echo "\tstop 停止"
-    echo "\trestart 更新重启"
+    printf "XHSK-Home-Website维护工具\n "
+    printf "\tstart 开启\n"
+    printf "\tstop 停止\n"
+    printf "\trestart 更新重启\n"
     exit
 fi
 
