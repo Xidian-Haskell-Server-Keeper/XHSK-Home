@@ -49,6 +49,7 @@ function bin_kill()
 
 function  doStart ()
 {
+  echo "start"
   RTa=git_pull
   if [ 0 == RTa ]
     then
@@ -68,6 +69,7 @@ function  doStart ()
 
 function doStop ()
 {
+  echo "stop"
   RTc=bin_kill
   if [ 0 == RTc ]
     then
@@ -77,6 +79,7 @@ function doStop ()
 
 function doRestart ()
 {
+  echo "restart"
   RTa=git_pull
   if [ 0 == RTa ]
     then
