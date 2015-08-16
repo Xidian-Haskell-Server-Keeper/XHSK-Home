@@ -64,5 +64,5 @@ function bin_kill()
 function  doStart ()
 {
   RTa=git_pull
-  if RTa
+  if 
 }
