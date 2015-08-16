@@ -100,7 +100,7 @@ function doRestart ()
 }
 
 
-if [ -n $1 ]
+if [ $1 ]
   then
     case $1 in
       start) doStart;;
