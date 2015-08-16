@@ -20,6 +20,7 @@ function cabal_install ()
     else
       echo "编译失败"
       return 0
+    fi
 }
 
 function git_pull ()
@@ -32,6 +33,7 @@ function git_pull ()
   else
     echo "同步失败"
     return 0
+  fi
 }
 
 function bin_run()
