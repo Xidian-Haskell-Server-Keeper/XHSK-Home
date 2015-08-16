@@ -12,8 +12,8 @@
 function cabal_install ()
 {
   echo "XHSK-Home 编译"
-  CIOP=$(cabal install XHSK-Home/ | grep "XHSK-Home" Install* |cat)
-  if [-n "$CIOP"]
+  CIOP=$( cabal install XHSK-Home/ | grep "XHSK-Home" Install* |cat )
+  if [ -n "$CIOP" ]
     then
       echo "编译完成"
       return 1
@@ -25,8 +25,8 @@ function cabal_install ()
 
 function git_pull ()
 {
-  GPOUTPUT=$(git pull origin)
-  if [-n "$GPOUTPUT"]
+  GPOUTPUT=$( git pull origin )
+  if [ -n "$GPOUTPUT" ]
     then
     echo "同步成功"
     return 1
@@ -38,29 +38,29 @@ function git_pull ()
 
 function bin_run()
 {
-  nothing=$(.cabal-sandbox/bin/XHSK-Home.Bin) &
+  nothing=$( .cabal-sandbox/bin/XHSK-Home.Bin & )
 }
 
 function bin_kill()
 {
-  killid=$(pgrep XHSK-Home.Bin)
+  killid=$( pgrep XHSK-Home.Bin )
   kill -9 $killid
 }
 
 function  doStart ()
 {
   RTa=git_pull
-  if [0 -eq RTa]
+  if [ 0 -eq RTa ]
     then
       return 0
   fi
   RTb=cabal_install
-  if [0 -eq RTb]
+  if [ 0 -eq RTb ]
     then
       return 0
   fi
   RTd=bin_run
-  if [0 -eq RTd]
+  if [ 0 -eq RTd ]
     then
        return 0
   fi
@@ -69,7 +69,7 @@ function  doStart ()
 function doStop ()
 {
   RTc=bin_kill
-  if [0 -eq RTc]
+  if [ 0 -eq RTc ]
     then
        return 0
   fi
@@ -78,22 +78,22 @@ function doStop ()
 function doRestart ()
 {
   RTa=git_pull
-  if [0 -eq RTa]
+  if [ 0 -eq RTa ]
     then
       return 0
   fi
   RTb=cabal_install
-  if [0 -eq RTb]
+  if [ 0 -eq RTb ]
     then
       return 0
   fi
   RTc=bin_kill
-  if [0 -eq RTc]
+  if [ 0 -eq RTc ]
     then
        return 0
   fi
   RTd=bin_run
-  if [0 -eq RTd]
+  if [ 0 -eq RTd ]
     then
        return 0
   fi
