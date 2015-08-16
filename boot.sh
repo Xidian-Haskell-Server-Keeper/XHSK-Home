@@ -50,7 +50,7 @@ function bin_kill()
 function  doStart ()
 {
   RTa=git_pull
-  if [ 0 -eq RTa ]
+  if [ 0 == RTa ]
     then
       return 0
   fi
