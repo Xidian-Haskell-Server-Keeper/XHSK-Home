@@ -3,6 +3,7 @@
 module Main where
 
 import Web.Scotty
+import qualified Data.Text as T
 
 import Pages.Home
 import Pages.Null --404
