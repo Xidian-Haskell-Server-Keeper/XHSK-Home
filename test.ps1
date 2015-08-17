@@ -1,4 +1,4 @@
-cabal install
+cabal install 
 Start-Process -FilePath ./.cabal-sandbox/bin/XHSK-Home.Bin.exe
 Start-Process -FilePath http://localhost:3000/
 Write-Host "Press Any Key!"

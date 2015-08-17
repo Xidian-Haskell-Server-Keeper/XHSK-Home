@@ -1,29 +1,24 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main where
+module Main
+	(
+	main
+	) where
 
-import Web.Scotty
-import qualified Data.Text as T
+		import Web.Scotty
+		import qualified Data.Text as T
 
-import Pages.Home
-import Pages.Null --404
+		import Pages.Home
+		import Pages.Null --404
+		import Pages.Donate
 
-main = do
-	putStrLn "XHSK-Home begin!"
-	scotty 3000 $ do
-		get "/"  homePage
-		get "/404" nullPage
-		notFound $ nullPage
-	putStrLn "XHSK-Home end !"
-
-
-
-{-
-	delete "/" $ do
-  	html "deleted!"
-	post "/" $ do
-  	html "posted!"
-	put "/" $ do
-  	html "put-ted!"
-		get "/he" $ do
-			html "haha !"-}
+		main = do
+			putStrLn "XHSK-Home begin!"
+			scotty 3000 $ do
+				get "/"  homePage
+				delete "/" $ do
+					text "nothings"
+				get "/404" nullPage
+				get "/donate" donatePage
+				notFound $ nullPage
+			putStrLn "XHSK-Home end !"
