@@ -40,13 +40,12 @@ function git_pull ()
 
 function bin_run()
 {
-  nothing=$( exec ../.cabal-sandbox/bin/XHSK-Home.Bin & ) &
+  nothing=$( exec ../.cabal-sandbox/bin/XHSK-Home.Bin ) &
   return 1
 }
 
 function bin_kill()
 {
-  printf "dd"
   killid=$( pgrep XHSK-Home.Bin )
   kill -9 $killid
   return 1
