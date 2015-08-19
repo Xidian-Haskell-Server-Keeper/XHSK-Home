@@ -20,15 +20,16 @@ module  Pages.Donate
         head $ do
           title "Donate!"
         body $ do
-          h1 ! align "center" $ "捐助"
-          h2 ! align "center" $ "DONATE"
-          hr
-          hr
           h3 "导航"
           div $ do
             a ! href "/" $ "首页"
             "  "
             a ! href "/donate" $ "捐助"
+          hr
+          hr
+          h1 ! align "center" $ "捐助"
+          h2 ! align "center" $ "DONATE"
+          hr
           hr
           h3 $ a ! name "guide" $ "目录"
           div $ do

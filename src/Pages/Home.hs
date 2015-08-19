@@ -14,21 +14,21 @@ module Pages.Home
     import Text.Blaze.Html4.Transitional.Attributes (align)
     import Utils(blaze)
 
-
     homePage :: ActionM ()
     homePage = blaze $ do
       head $ do
         title "XHSK-Home"
       body $do
-        h1 ! align "center" $ "西电Hackage镜像站维护组主页"
-        h2 ! align "center" $ "XHSK-Home"
-        hr
-        hr
         h3 "导航"
         div $ do
           a ! href "/" $ "首页"
           "  "
           a ! href "/donate" $ "捐助"
+        hr
+        hr
+        h1 ! align "center" $ "西电Hackage镜像站维护组主页"
+        h2 ! align "center" $ "XHSK-Home"
+        hr
         hr
         h3 $ a ! name "guide" $ "目录"
         div $ do
