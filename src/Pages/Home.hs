@@ -13,19 +13,14 @@ module Pages.Home
     import Text.Blaze.Html5.Attributes(style,href,name)
     import Text.Blaze.Html4.Transitional.Attributes (align)
     import Utils(blaze)
+    import Common.Header(pagesHeader)
 
     homePage :: ActionM ()
     homePage = blaze $ do
       head $ do
         title "XHSK-Home"
       body $do
-        h3 "导航"
-        div $ do
-          a ! href "/" $ "首页"
-          "  "
-          a ! href "/donate" $ "捐助"
-        hr
-        hr
+        pagesHeader
         h1 ! align "center" $ "西电Hackage镜像站维护组主页"
         h2 ! align "center" $ "XHSK-Home"
         hr
