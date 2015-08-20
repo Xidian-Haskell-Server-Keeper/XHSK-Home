@@ -14,11 +14,12 @@ import Text.Blaze.Html.Renderer.Text(renderHtml)
 import Text.Blaze.Html5.Attributes(style,href,name)
 import Text.Blaze.Html4.Transitional.Attributes (align)
 import Utils(blaze)
-import Common.Header(pagesHeader)
+import Common.Header(pagesHeader,metasettings)
 
 nullPage :: ActionM ()
 nullPage = blaze $ do
   head $ do
+    metasettings
     title "404"
   body $ do
     pagesHeader

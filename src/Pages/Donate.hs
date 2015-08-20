@@ -13,12 +13,13 @@ module  Pages.Donate
       import Text.Blaze.Html5.Attributes(style,href,name)
       import Text.Blaze.Html4.Transitional.Attributes (align)
       import Text.Blaze.Html5(body,h1,br,p,div,head,title,h2,hr,b,h3,a,ul,li)
-      import Common.Header(pagesHeader)
+      import Common.Header(pagesHeader,pagesGuide,metasettings)
 
 
       donatePage :: ActionM ()
       donatePage = blaze $ do
         head $ do
+          metasettings
           title "Donate!"
         body $ do
           pagesHeader
@@ -26,13 +27,12 @@ module  Pages.Donate
           h2 ! align "center" $ "DONATE"
           hr
           hr
-          h3 $ a ! name "guide" $ "目录"
-          div $ do
-            ul $ do
-              li $ a ! href "#guide" $ "目录"
-              li $ a ! href "#forus" $ "捐款"
-              li $ a ! href "#useage" $ "捐款去处"
-              li $ a ! href "#how" $ "如何捐款"
+          pagesGuide [
+              ("forus","捐款"),
+              ("useage","捐款去处"),
+              ("how","如何捐款"),
+              ("supervise","监督我们")
+            ]
           hr
           h3 $ a ! name "forus" $ "为我们能捐款"
           div $ do

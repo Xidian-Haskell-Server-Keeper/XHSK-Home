@@ -11,9 +11,9 @@ module Common.Header
       import Web.Scotty(ActionM,html)
       import Text.Blaze.Html((!),toHtml)
       import Text.Blaze.Html.Renderer.Text(renderHtml)
-      import Text.Blaze.Html5.Attributes(style,href,name)
+      import Text.Blaze.Html5.Attributes(style,href,name,content,name)
       import Text.Blaze.Html4.Transitional.Attributes (align)
-      import Text.Blaze.Html5(Html,header,nav,h1,br,p,div,head,title,h2,hr,a,b,h3,ul,li)
+      import Text.Blaze.Html5(Html,header,nav,h1,br,p,div,head,title,h2,hr,a,b,h3,ul,li,meta)
 
 
 
@@ -30,13 +30,14 @@ module Common.Header
                   ("/document","文档"),
                   ("/donate","捐助")
                 ]
-                where
-                  break :: Html -> Html ->Html
-                  break x = return x >>= "  "
         hr
-        hr
+        where
+          break :: Html -> Html
+          break x = do
+            "   "
+            x
 
-      makeLink :: [(String,String)] -> Html
+      makeLink :: (String,String) -> Html
       makeLink (x,y) = a ! href path $ toHtml y
         where
           path = stringValue x
@@ -45,9 +46,10 @@ module Common.Header
       pagesGuide x = do
         h3 $ a ! name "guide" $ "目录"
         ul $ do
-          mconcat $ map ((li $).makeLink) x
+          mconcat $ map ((li $).makeLink.addSharp) x
+        where
+          addSharp (x,y) = ('#':x,y)
 
       metasettings :: Html
       metasettings = do
         meta ! content "width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" ! name "viewport"
-

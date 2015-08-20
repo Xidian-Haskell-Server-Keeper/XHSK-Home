@@ -26,13 +26,11 @@ module Pages.Home
         h2 ! align "center" $ "XHSK-Home"
         hr
         hr
-        h3 $ a ! name "guide" $ "目录"
-        div $ do
-          ul $ do
-            li $ a ! href "#guide" $ "目录"
-            li $ a ! href "#info" $  "简介"
-            li $ a ! href "#hackage" $ "Hackage"
-            li $ a ! href "#about" $ "其他"
+        pagesGuide [
+              ("info","简介"),
+              ("hackage","Hackage"),
+              ("about","其他")
+            ]
         hr
         h3 $ a ! name "info" $  "简介"
         div $ do
