@@ -13,11 +13,12 @@ module Pages.Home
     import Text.Blaze.Html5.Attributes(style,href,name)
     import Text.Blaze.Html4.Transitional.Attributes (align)
     import Utils(blaze)
-    import Common.Header(pagesHeader)
+    import Common.Header(pagesHeader,pagesGuide,metasettings)
 
     homePage :: ActionM ()
     homePage = blaze $ do
       head $ do
+        metasettings
         title "XHSK-Home"
       body $do
         pagesHeader

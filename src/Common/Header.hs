@@ -3,7 +3,8 @@
 module Common.Header
     (
       pagesHeader,
-      pagesGuide
+      pagesGuide,
+      metasettings
     ) where
       import Text.Blaze.Internal(stringValue,string)
       import Prelude hiding (div,head)
