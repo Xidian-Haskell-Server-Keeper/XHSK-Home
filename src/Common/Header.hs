@@ -46,3 +46,7 @@ module Common.Header
         ul $ do
           mconcat $ map ((li $).makeLink) x
 
+      metasettings :: Html
+      metasettings = do
+        meta ! content "width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" ! name "viewport"
+
