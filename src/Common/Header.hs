@@ -17,7 +17,6 @@ module Common.Header
 
 
       pagesHeader :: Html
-
       pagesHeader = do
         hr
         header $ do
@@ -25,22 +24,25 @@ module Common.Header
           nav $ do
             h3 "导航"
             div $ do
-              a ! href "/" $ "首页"
-              "  "
-              a ! href "/document" $ "文档"
-              "  "
-              a ! href "/donate" $ "捐助"
+              mconcat $ map (break.makeLink)[
+                  ("/","首页"),
+                  ("/document","文档"),
+                  ("/donate","捐助")
+                ]
+                where
+                  break :: Html -> Html ->Html
+                  break x = return x >>= "  "
         hr
         hr
+
+      makeLink :: [(String,String)] -> Html
+      makeLink (x,y) = a ! href path $ toHtml y
+        where
+          path = stringValue x
 
       pagesGuide :: [(String,String)] -> Html
       pagesGuide x = do
         h3 $ a ! name "guide" $ "目录"
         ul $ do
-          mconcat $ map guideToHtml x
+          mconcat $ map ((li $).makeLink) x
 
-      guideToHtml :: (String,String) -> Html
-      guideToHtml (x,y) =
-        li $ a ! href tag $ toHtml y
-        where
-          tag = stringValue $ '#':x
