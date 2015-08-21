@@ -13,11 +13,15 @@ module Main
 		import Pages.Donate
 		import Pages.Document
 
+
 		main = do
 			putStrLn "XHSK-Home begin!"
 			scotty 3000 $ do
 				get "/"  homePage
 				get "/document" documentPage
+				get (regex "^/docs(.*)") $ do
+   					cap <- param "1"
+   					file $ docsLink cap
 				delete "/" $ do
 					text "nothings"
 				get "/404" nullPage

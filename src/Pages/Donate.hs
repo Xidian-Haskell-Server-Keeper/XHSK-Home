@@ -28,7 +28,7 @@ module  Pages.Donate
               ("how","如何捐款"),
               ("supervise","监督我们")
             ]
-          h3 $ a ! name "forus" $ "为我们能捐款"
+          h3 $ a ! name "forus" $ "为我们捐款"
           div $ do
             p "为什么我们需要捐款？"
             p $ do
