@@ -19,8 +19,8 @@ module Pages.Document
       documentPage :: ActionM ()
       documentPage = blaze $ do
         head $ do
-          title "Document"
           metasettings
+          title "Document"
         body $ do
           pagesHeader "文档" "Documents" []
           h3 $ a ! name "ghc" $ "Glasgow Haskell Compilation's Document"
