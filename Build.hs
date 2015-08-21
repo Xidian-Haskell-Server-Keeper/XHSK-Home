@@ -84,7 +84,7 @@ unixMain arg = do
   where
     start'git = do
       (_,_,_,git'pull) <- createProcess $
-        proc "git" ["pull","master"]
+        proc "git" ["pull","origin"]
       exCode <- waitForProcess git'pull
       case exCode of
         ExitSuccess -> start'cabal
