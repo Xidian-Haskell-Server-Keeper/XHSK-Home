@@ -19,23 +19,23 @@ data OS = Windows | Linux deriving (Show)
 instance Read OS where
   readsPrec _ s =
         case s of
-          "Windows"  -> return Windows
-          "Linux" -> return Linux
-          "windows"  -> return Windows
-          "linux" -> return Linux
+          "Windows"  -> return (Windows,"")
+          "Linux" -> return (Linux,"")
+          "windows"  -> return (Windows,"")
+          "linux" -> return (Linux,"")
 
 data Run = Start | Stop | Restart | Test deriving (Show)
 instance Read Run where
   readsPrec _ s =
         case s of
-          "Start"->Start
-          "Stop"->Stop
-          "Restart"->Restart
-          "Test"->Test
-          "start"->Start
-          "stop"->Stop
-          "restart"->Restart
-          "test"->Test
+          "Start"->[(Start,"")]
+          "Stop"->[(Stop,"")]
+          "Restart"->[(Restart,"")]
+          "Test"->[(Test,"")]
+          "start"->[(Start,"")]
+          "stop"->[(Stop,"")]
+          "restart"->[(Restart,"")]
+          "test"->[(Test,"")]
 
 maintain :: IO () -> IO () -> IO ()
 maintain w u = do
