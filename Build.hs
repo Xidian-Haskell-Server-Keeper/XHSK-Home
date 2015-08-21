@@ -19,10 +19,10 @@ data OS = Windows | Linux deriving (Show)
 instance Read OS where
   readsPrec _ s =
         case s of
-          "Windows"  -> return (Windows,"")
-          "Linux" -> return (Linux,"")
-          "windows"  -> return (Windows,"")
-          "linux" -> return (Linux,"")
+          "Windows"  -> [(Windows,"")]
+          "Linux" -> [(Linux,"")]
+          "windows"  -> [(Windows,"")]
+          "linux" -> [(Linux,"")]
 
 data Run = Start | Stop | Restart | Test deriving (Show)
 instance Read Run where
@@ -41,8 +41,9 @@ maintain :: IO () -> IO () -> IO ()
 maintain w u = do
   putStrLn "XHSK-Home 维护"
   x <- readFile "./info"
-  let flag = read x :: OS
-  case flag of
+  let xx = head $ lines x
+  let flag = read xx :: OS
+  case  flag of
     Linux -> u
     Windows -> w
     _ -> undefined
