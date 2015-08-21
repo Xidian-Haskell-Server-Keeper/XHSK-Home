@@ -21,17 +21,11 @@ module Pages.Home
         metasettings
         title "XHSK-Home"
       body $do
-        pagesHeader
-        h1 ! align "center" $ "西电Hackage镜像站维护组主页"
-        h2 ! align "center" $ "XHSK-Home"
-        hr
-        hr
-        pagesGuide [
+        pagesHeader"西电Hackage镜像站维护组主页" "XHSK-Home" [
               ("info","简介"),
               ("hackage","Hackage"),
               ("about","其他")
             ]
-        hr
         h3 $ a ! name "info" $  "简介"
         div $ do
           p $  do

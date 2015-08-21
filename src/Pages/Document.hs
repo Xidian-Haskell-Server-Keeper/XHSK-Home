@@ -19,8 +19,4 @@ module Pages.Document
         head $ do
           title "Document"
         body $ do
-          pagesHeader
-          pagesGuide [
-              ("a","sda"),
-              ("b","SAd")
-            ]
+          pagesHeader "文档" "Documents" []

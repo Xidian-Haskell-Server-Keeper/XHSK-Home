@@ -17,8 +17,8 @@ module Common.Header
 
 
 
-      pagesHeader :: Html
-      pagesHeader = do
+      pagesHeader :: String -> String -> [(String,String)] -> Html
+      pagesHeader cnTitle enTitle guide = do
         hr
         header $ do
           "西电Hackage镜像站维护组主页"
@@ -30,6 +30,12 @@ module Common.Header
                   ("/document","文档"),
                   ("/donate","捐助")
                 ]
+        hr
+        h1 ! align "center" $ toHtml cnTitle
+        h2 ! align "center" $ toHtml enTitle
+        hr
+        hr
+        pagesGuide guide
         hr
         where
           break :: Html -> Html

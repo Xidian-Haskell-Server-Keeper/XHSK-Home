@@ -22,18 +22,12 @@ module  Pages.Donate
           metasettings
           title "Donate!"
         body $ do
-          pagesHeader
-          h1 ! align "center" $ "捐助"
-          h2 ! align "center" $ "DONATE"
-          hr
-          hr
-          pagesGuide [
+          pagesHeader "捐助" "DONATE!" [
               ("forus","捐款"),
               ("useage","捐款去处"),
               ("how","如何捐款"),
               ("supervise","监督我们")
             ]
-          hr
           h3 $ a ! name "forus" $ "为我们能捐款"
           div $ do
             p "为什么我们需要捐款？"
