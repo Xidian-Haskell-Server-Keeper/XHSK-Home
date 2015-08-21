@@ -11,6 +11,10 @@ import System.Environment
 import System.Process
 import System.Directory
 import System.Exit
+import System.IO
+
+import Data.Time
+import Control.Monad
 
 
 
@@ -80,36 +84,50 @@ unixMain :: String -> IO ()
 unixMain arg = do
   let flag = read arg :: Run
   case flag of
-    Start -> start'git
+    Start -> do
+      gitPull
+      cabalInstall
+      startIt
     Stop -> stopIt
-    Restart -> restartIt
+    Restart -> do
+      (_:aim':_) <- getArgs
+      let aim = (read (head $ lines aim') ::UTCTime)
+      localTimeZone <- getTimeZone aim
+      let localTime = utcToLocalTime localTimeZone aim
+      hMP <- openFile "./.maintain.plan" WriteMode
+      hPutStr hMP $ show localTime
+      hClose hMP
+      gitPull
+      cabalInstall
+      waitIt aim
+      stopIt
+      startIt
     _ -> undefined
   where
-    start'git = do
+    gitPull = do
       (_,_,_,git'pull) <- createProcess $
         proc "git" ["pull","origin"]
       exCode <- waitForProcess git'pull
       case exCode of
-        ExitSuccess -> start'cabal
-        _ -> putStrLn "repo 同步失败"
+        ExitSuccess -> return ()
+        _ -> error "repo 同步失败"
       return ()
-    start'cabal =do
+    cabalInstall =do
       setCurrentDirectory ".."
       (_,_,_,cabal'install) <- createProcess $
         proc "cabal" ["install","./XHSK-Home/"]
       exCode <- waitForProcess cabal'install
       case exCode of
-        ExitSuccess -> start'server
-        _ -> putStrLn "cabal 安装失败"
+        ExitSuccess -> return ()
+        _ -> error "cabal 安装失败"
       return ()
-    start'server = do
+    startIt = do
       createProcess $
         shell "exec .cabal-sandbox/bin/XHSK-Home.Bin"
       return ()
     stopIt = do
       createProcess $ shell "pidof XHSK-Home.Bin | xargs kill -s 9"
       return ()
-    restartIt = do
-      stopIt
-      start'git
-      return ()
+    waitIt wait = do
+      cur <- getCurrentTime
+      when (wait > cur) $ waitIt wait

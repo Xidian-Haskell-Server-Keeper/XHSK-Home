@@ -13,8 +13,11 @@ module Main
 		import Pages.Donate
 		import Pages.Document
 
+		import System.Directory(getCurrentDirectory)
+
 
 		main = do
+			getCurrentDirectory >>= putStrLn
 			putStrLn "XHSK-Home begin!"
 			scotty 3000 $ do
 				get "/"  homePage

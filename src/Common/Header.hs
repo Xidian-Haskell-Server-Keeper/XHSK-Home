@@ -14,14 +14,15 @@ module Common.Header
       import Text.Blaze.Html5.Attributes(style,href,name,content,name)
       import Text.Blaze.Html4.Transitional.Attributes (align)
       import Text.Blaze.Html5(Html,header,nav,h1,br,p,div,head,title,h2,hr,a,b,h3,ul,li,meta)
-
-
+      import Common.HeaderMaintain(maintainTime)
+      import System.IO.Unsafe
 
       pagesHeader :: String -> String -> [(String,String)] -> Html
       pagesHeader cnTitle enTitle guide = do
         hr
         header $ do
           "西电Hackage镜像站维护组主页"
+          toHtml $ unsafePerformIO $ maintainTime
           nav $ do
             h3 "导航"
             div $ do
