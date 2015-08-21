@@ -62,7 +62,10 @@ windowsMain arg = do
   case flag of
     Test -> do
       (_,_,_,cabalinstall) <- createProcess $ shell "cabal install"
-      waitForProcess cabalinstall
+      ciEc <- waitForProcess cabalinstall
+      case ciEc of
+        ExitSuccess -> putStrLn "编译成功"
+        _ -> error "编译错误"
       createProcess $
         proc "./.cabal-sandbox/bin/XHSK-Home.Bin.exe" []
       createProcess $
