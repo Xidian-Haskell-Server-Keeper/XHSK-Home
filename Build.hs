@@ -103,7 +103,8 @@ unixMain arg = do
       waitIt aim
       stopIt
       startIt
-      removeFile "./.maintain.plan"
+      createProcess $ shell "rm ./.maintain.plan"
+      return ()
     _ -> undefined
   where
     gitPull = do
