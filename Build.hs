@@ -125,7 +125,7 @@ unixMain arg = do
       return ()
     startIt = do
       createProcess $
-        shell "exec .cabal-sandbox/bin/XHSK-Home.Bin"
+        shell "exec .cabal-sandbox/bin/XHSK-Home.Bin &"
       return ()
     stopIt = do
       createProcess $ shell "pidof XHSK-Home.Bin | xargs kill -s 9"
