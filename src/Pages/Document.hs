@@ -40,4 +40,4 @@ module Pages.Document
                 "GHC API"
 
       docsLink :: FilePath -> FilePath
-      docsLink v = "../XHSK-Doc/" ++ v
+      docsLink v = "./XHSK-Doc/" ++ v

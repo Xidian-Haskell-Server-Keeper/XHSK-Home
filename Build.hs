@@ -2,7 +2,7 @@
 
 
 {-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE StandaloneDeriving, ScopedTypeVariables #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 
 module Build where
@@ -65,7 +65,8 @@ windowsMain arg = do
   let flag = read arg :: Run
   case flag of
     Test -> do
-      (_,_,_,cabalinstall) <- createProcess $ shell "cabal install"
+      setCurrentDirectory ".."
+      (_,_,_,cabalinstall) <- createProcess $ shell "cabal install XHSK-Home/"
       ciEc <- waitForProcess cabalinstall
       case ciEc of
         ExitSuccess -> putStrLn "编译成功"
@@ -102,6 +103,7 @@ unixMain arg = do
       waitIt aim
       stopIt
       startIt
+      removeFile "./.maintain.plan"
     _ -> undefined
   where
     gitPull = do
