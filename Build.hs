@@ -128,7 +128,9 @@ unixMain arg = do
         shell "exec .cabal-sandbox/bin/XHSK-Home.Bin &"
       return ()
     stopIt = do
-      createProcess $ shell "pidof XHSK-Home.Bin | xargs kill -s 2"
+      putStrLn "Ready to Stop"
+      (_,_,_,sstop) <- createProcess $ shell "pidof XHSK-Home.Bin | xargs kill -s 2"
+      waitForProcess sstop
       return ()
     waitIt wait = do
       cur <- getCurrentTime
