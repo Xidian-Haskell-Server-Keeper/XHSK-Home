@@ -103,7 +103,7 @@ unixMain arg = do
       waitIt aim
       stopIt
       startIt
-      removeFile "./.maintain.plan"
+      removeFile ".maintain.plan"
     _ -> undefined
   where
     gitPull = do
