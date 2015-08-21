@@ -103,8 +103,7 @@ unixMain arg = do
       waitIt aim
       stopIt
       startIt
-      createProcess $ shell "rm ./.maintain.plan"
-      return ()
+      removeFile "./XHSK-Home/.maintain.plan"
     _ -> undefined
   where
     gitPull = do
