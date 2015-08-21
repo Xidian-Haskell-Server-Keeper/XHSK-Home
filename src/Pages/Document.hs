@@ -26,7 +26,8 @@ module Pages.Document
           h3 $ a ! name "ghc" $ "Glasgow Haskell Compilation's Document"
           div $ do
             ul $ do
-              li $ a ! href "/docs/haskell-platform-7.10.2/users_guide/index.html" $ "s"
+              li $ a ! href "/docs/haskell-platform-7.10.2/users_guide/index.html" $
+                "users_guide"
 
       docsLink :: FilePath -> FilePath
       docsLink v = "../XHSK-Doc/" ++ v
