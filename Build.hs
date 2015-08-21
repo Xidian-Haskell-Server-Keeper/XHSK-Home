@@ -1,4 +1,5 @@
-#!/bin/runghc
+#!/usr/local/bin/runghc
+
 
 {-# LANGUAGE Trustworthy #-}
 {-# LANGUAGE StandaloneDeriving, ScopedTypeVariables #-}
