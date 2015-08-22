@@ -95,7 +95,7 @@ unixMain arg = do
       let aim = (read (head $ lines aim') ::UTCTime)
       localTimeZone <- getTimeZone aim
       let localTime = utcToLocalTime localTimeZone aim
-      hMP <- openFile "./.maintain.plan" WriteMode
+      hMP <- openFile "../.maintain.plan" WriteMode
       hPutStr hMP $ show localTime
       hClose hMP
       gitPull
@@ -103,7 +103,7 @@ unixMain arg = do
       waitIt aim
       stopIt
       startIt
-      removeFile "./XHSK-Home/.maintain.plan"
+      removeFile "./.maintain.plan"
     _ -> undefined
   where
     gitPull = do
