@@ -15,6 +15,7 @@ module Pages
 
       import Frame()
       import Text.Blaze.Html((!))
+      import Text.Blaze.Internal(string,stringValue)
       import Text.Blaze.Html5(
           Html,hr,p,a,ul,li,h1,h2,h3,h4,div
         )
@@ -105,8 +106,8 @@ module Pages
             ("hackage","Hackage"),
             ("about","其他")
           ]
-      homePage :: Html
-      homePage = do
+      homePage :: String -> Html
+      homePage hackagUrl = do
         h3 $ a ! name "info" $  "简介"
         div $ do
           p $  do
@@ -122,6 +123,28 @@ module Pages
             "。"
         hr
         h3 $ a ! name "hackage" $"Hackage"
+        div $ do
+          h4 "使用Hackage"
+          p $ do
+            "Hackage 的网址："
+            a ! href (stringValue hackagUrl) $ "Hackage-Server"
+          p $ do
+            "使用方法：在 cabal 的 config 配置文件中加入"
+            string $ "remote-repo: XHSK-Hackage:" ++ hackagUrl
+            " 即可。执行 cabal update 既可以从站点获取你想要的了。"
+          h4 "上传"
+          p $ do
+            "首先需要的是一个账户，需要向"
+            a ! href "mailto:qinka@live.com?subject=XHSK-Hackage%20上传账户申请&body=%0dXHSK-Hackage账户申请%0d申请账户名：%0d申请密码%0d联系邮箱："
+              $ "qinka@live.com"
+            "提交申请，最好在最后附上您所在的学院、专业、班级，同时附加上你的QQ号。"
+            "您在发出邮件之后我们会尽快为您处理，无论您是否通过，都会收到我们的回复通知。"
+          h4 "镜像同步"
+          p $ do
+            "目前我们正处于测试阶段，同步的频率不定。我们直接从 "
+            a ! href "http://hackage.haskell.org" $ "hackage.haskell.org"
+            " 同步。"
+
         hr
         h3 $ a ! name "about" $"其他"
         div $ do

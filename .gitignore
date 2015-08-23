@@ -16,3 +16,4 @@ cabal.sandbox.config
 *.hp
 info
 .maintain.plan
+.xhsk.home.config

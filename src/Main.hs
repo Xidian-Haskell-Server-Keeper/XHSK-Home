@@ -8,8 +8,8 @@ module Main
 		import Web.Scotty
 		import qualified Data.Text as T
 		import System.Directory(getCurrentDirectory,doesFileExist)
-		import System.IO.Unsafe
-
+		--import System.IO.Unsafe
+		import Config(pickerData,getDataFromFile,getData)
 		import Data.Text.Lazy(pack)
 
 		import Frame(pageFrame,Title(..))
@@ -41,11 +41,16 @@ module Main
 		main = do
 			getCurrentDirectory >>= putStrLn
 			putStrLn "XHSK-Home begin!"
+			--for Hackage
+			configData <- getDataFromFile "./.xhsk.home.config"
+			let hackageUrl = case getData configData pickerData "hackag-url" of
+				Just x -> x
+				Nothing -> error "fail to read hackage-url"
 			scotty 3000 $ do
 				get "/" $ pageFrame
 					(Title "西电Hackage镜像站维护组主页" "XHSK-Home" "XHSK-Home")
 					homeGuide
-					homePage
+					(homePage hackageUrl)
 					webStatus
 				get "/document" $ pageFrame
 					(Title "文档" "Documents" "Documents")
