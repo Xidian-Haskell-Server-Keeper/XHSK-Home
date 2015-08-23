@@ -31,9 +31,9 @@ module Main
 				False -> return Nothing
 			where
 				toMaybe = Just
-		{-# NOINLINE webStatus #-}
-		webStatus :: Maybe String
-		webStatus = Nothing
+
+		webStatus :: Bool
+		webStatus = True
 
 
 
@@ -57,6 +57,7 @@ module Main
 					donateGuide
 					donatePage
 					webStatus
+				get "/site-status" $ file "./.maintain.plan"
 				get (regex "^/docs(.*)") $ do
    					cap <- param "1"
    					file $ docsLink cap

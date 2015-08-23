@@ -15,13 +15,15 @@ module Frame
       import Web.Scotty(ActionM)
       import Text.Blaze.Internal(string,stringValue)
       import Text.Blaze.Html((!),toHtml)
+      import Text.Blaze.Html4.FrameSet.Attributes(frameborder)
       import Text.Blaze.Html4.Transitional.Attributes (align)
       import Text.Blaze.Html5(
           Html,hr,p,b,head,title,meta,header,
-          nav,a,body,h1,h2,h3,div,ul,li,img
+          nav,a,body,h1,h2,h3,div,ul,li,img,
+          iframe,br
         )
       import Text.Blaze.Html5.Attributes(
-          href,name,content,name,src
+          href,name,content,name,src,height,width,charset
         )
 
 
@@ -32,6 +34,7 @@ module Frame
           ! content
             "width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
           ! name "viewport"
+          ! charset "UTF-8"
 
       break :: Html -> Html
       break x = do
@@ -51,7 +54,7 @@ module Frame
       pageFrame :: Title                     -- title
              -> Maybe [(String,String)]   -- Guide
              -> Html                      -- 网页内部
-             -> Maybe String              -- 网站 状态 提示
+             -> Bool             -- 网站 状态 提示
              -> ActionM ()
 
       pageFrame  t@(Title cnT enT webT) g mainPart info = blaze $ do
@@ -62,14 +65,10 @@ module Frame
           p ! src ".maintain.plan" $ ""
           hr
           header $ do
-            case info of
-              Just x -> do
-                p $ string x
-                "西电Hackage镜像站维护组主页"
-              Nothing -> b "西电Hackage镜像站维护组主页"
-          nav $ do
-            h3 "导航"
-            div $ mconcat $ map (break.makeLink) pagesLinks
+            "西电Hackage镜像站维护组主页"
+            nav $ do
+              h3 "导航"
+              div $ mconcat $ map (break.makeLink) pagesLinks
           hr
           h1 ! align "center" $ toHtml cnT
           h2 ! align "center" $ toHtml enT
@@ -86,5 +85,17 @@ module Frame
                     ) g'
               hr
           mainPart
+          case info of
+            False -> ""
+            True -> do
+              hr
+              "网站状态（出现乱码，请尝试刷新）："
+              br
+              iframe ! src "/site-status"
+                     ! align "middle"
+                     ! frameborder "0"
+                     ! width "100%"
+                     ! height "40"
+                     $ "更换浏览器"
           hr
           p ! align "right" $ "Powered by Scotty · Copyright 2015 XHSK"

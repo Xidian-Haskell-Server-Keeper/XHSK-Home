@@ -11,10 +11,15 @@ import System.Environment
 import System.Process
 import System.Directory
 import System.Exit
-import System.IO
+import System.IO.Extra(writeFileUTF8)
+
+
 
 import Data.Time
 import Control.Monad
+import Text.Blaze.Html.Renderer.String(renderHtml)
+
+
 
 
 
@@ -95,10 +100,7 @@ unixMain arg = do
       let aim = (read (head $ lines aim') ::UTCTime)
       localTimeZone <- getTimeZone aim
       let localTime = utcToLocalTime localTimeZone aim
-      hMP <- openFile "../.maintain" WriteMode
-      hSeek hMP AbsoluteSeek 0
-      hPutStrLn hMP $ (++) "预计维护时间：" $ show localTime
-      hClose hMP
+      writeFileUTF8 "../.maintain.plna" $ (++) "本站即将进入维护，预计维护时间：" $ show localTime
       gitPull
       cabalInstall
       waitIt aim
@@ -126,7 +128,7 @@ unixMain arg = do
     startIt = do
       createProcess $
         shell "exec .cabal-sandbox/bin/XHSK-Home.Bin &"
-      return ()
+      writeFileUTF8 "./.maintain.plan" "正常运行"
     stopIt = do
       putStrLn "Ready to Stop"
       (_,_,_,sstop) <- createProcess $ shell "pidof XHSK-Home.Bin | xargs kill -s 2"

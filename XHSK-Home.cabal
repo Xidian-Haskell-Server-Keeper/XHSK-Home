@@ -1,5 +1,5 @@
 name:                XHSK-Home
-version:             0.0.45
+version:             0.0.55
 synopsis:            Xidian Hackage Server Keeper
 description:         The home of XHSK
 homepage:            https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home
@@ -10,6 +10,7 @@ maintainer:          qinka@live.com
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.12
+
 
 executable           XHSK-Home.Bin
   main-is:             Main.hs
