@@ -1,5 +1,5 @@
 name:                XHSK-Home
-version:             0.0.25
+version:             0.0.45
 synopsis:            Xidian Hackage Server Keeper
 description:         The home of XHSK
 homepage:            https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home
@@ -37,4 +37,6 @@ executable           XHSK-Home.Bin
                      , time
                      , clay
                      , directory
+                     , extra
+                     , old-time
   hs-source-dirs:    src

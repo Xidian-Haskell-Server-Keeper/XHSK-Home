@@ -95,15 +95,15 @@ unixMain arg = do
       let aim = (read (head $ lines aim') ::UTCTime)
       localTimeZone <- getTimeZone aim
       let localTime = utcToLocalTime localTimeZone aim
-      hMP <- openFile "../.maintain.plan" WriteMode
-      hPutStr hMP $ show localTime
+      hMP <- openFile "../.maintain" WriteMode
+      hSeek hMP AbsoluteSeek 0
+      hPutStrLn hMP $ (++) "预计维护时间：" $ show localTime
       hClose hMP
       gitPull
       cabalInstall
       waitIt aim
       stopIt
       startIt
-      removeFile "./.maintain.plan"
     _ -> undefined
   where
     gitPull = do

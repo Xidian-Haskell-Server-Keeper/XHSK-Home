@@ -7,27 +7,62 @@ module Main
 
 		import Web.Scotty
 		import qualified Data.Text as T
+		import System.Directory(getCurrentDirectory,doesFileExist)
+		import System.IO.Unsafe
 
-		import Pages.Home
-		import Pages.Null --404
-		import Pages.Donate
-		import Pages.Document
+		import Data.Text.Lazy(pack)
 
-		import System.Directory(getCurrentDirectory)
+		import Frame(pageFrame,Title(..))
+		import Pages(
+				homeGuide,homePage,
+				documentPage,documentGuide,
+				donatePage,donateGuide,
+				nullPage
+			)
+
+		docsLink :: FilePath -> FilePath
+		docsLink v = "./XHSK-Doc" ++ v
+		webStatusIO :: IO (Maybe String)
+		webStatusIO = do
+			is <- doesFileExist "./.maintain.plan"
+			case is of
+				True -> do
+					toMaybe <$> readFile "./.maintain.plan"
+				False -> return Nothing
+			where
+				toMaybe = Just
+		{-# NOINLINE webStatus #-}
+		webStatus :: Maybe String
+		webStatus = Nothing
 
 
+
+		main :: IO ()
 		main = do
 			getCurrentDirectory >>= putStrLn
 			putStrLn "XHSK-Home begin!"
 			scotty 3000 $ do
-				get "/"  homePage
-				get "/document" documentPage
+				get "/" $ pageFrame
+					(Title "西电Hackage镜像站维护组主页" "XHSK-Home" "XHSK-Home")
+					homeGuide
+					homePage
+					webStatus
+				get "/document" $ pageFrame
+					(Title "文档" "Documents" "Documents")
+					documentGuide
+					documentPage
+					webStatus
+			 	get "/donate" $ pageFrame
+					(Title "捐助" "DONATE!" "DONATE!")
+					donateGuide
+					donatePage
+					webStatus
 				get (regex "^/docs(.*)") $ do
    					cap <- param "1"
    					file $ docsLink cap
-				delete "/" $ do
-					text "nothings"
-				get "/404" nullPage
-				get "/donate" donatePage
-				notFound $ nullPage
+				notFound $ pageFrame
+					(Title "404" "访问页面无法找到。" "404")
+					Nothing
+					nullPage
+					webStatus
 			putStrLn "XHSK-Home end !"
