@@ -94,13 +94,14 @@ unixMain arg = do
       gitPull
       cabalInstall
       startIt
+      writeFileUTF8 "../.maintain.plan"  "正常运行"
     Stop -> stopIt
     Restart -> do
       (_:aim':_) <- getArgs
       let aim = (read (head $ lines aim') ::UTCTime)
       localTimeZone <- getTimeZone aim
       let localTime = utcToLocalTime localTimeZone aim
-      writeFileUTF8 "../.maintain.plna" $ (++) "本站即将进入维护，预计维护时间：" $ show localTime
+      writeFileUTF8 "../.maintain.plan" $ (++) "本站即将进入维护，预计维护时间：" $ show localTime
       gitPull
       cabalInstall
       waitIt aim
