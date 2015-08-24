@@ -30,7 +30,10 @@ module Pages
         p "少思八九，常想一二"
 
       documentGuide :: Maybe[(String,String)]
-      documentGuide = Nothing
+      documentGuide =  Just [
+        ("ghc","GHC"),
+        ("xhskhackage","XHSK-Hackage=")
+        ]
 
       documentPage :: Html
       documentPage = do
@@ -49,6 +52,35 @@ module Pages
               "Libraries"
             li $ a ! href "/docs/haskell-platform-7.10.2/libraries/ghc-7.10.2/index.html" $
               "GHC API"
+        h3 $ a ! name "xhskhackage" $ "XHSK-Hackage"
+        div $ do
+          h4 "使用"
+          p "在 Cabal 的 config（配置文件） 中相对 hackage.haskell.org 添加一个 基于 XHSK－Hackage 的数据即可。"
+          p "之后可直接使用 cabal update 更新"
+          h4 "注册账户"
+          p $ do
+            "注册账户的方法目前只有通过直接向"
+            a ! href "mailto:qinka@live.com?subject=XHSK-Hackage%20上传账户申请&body=%0dXHSK-Hackage账户申请%0d申请账户名：%0d申请密码%0d联系邮箱："
+              $ "qinka@live.com"
+            "发送邮件申请获得。XHSK－Hackage中的邮件申请功能目前无法使用，其不会发送邮件到指定的邮箱中。邮件要求发送以下内容："
+            ul $ do
+              li "申请的账户名（如果有重名则会发回邮件要求重添）。"
+              li "申请账户的密码（可以不填，则要求自己修改）。"
+              li "联系方式，邮箱（可以直接填写qq号，西电校内的邮箱直接通过审核）。"
+              li "审核信息，写明您的身份信息（包括所在学院，班级姓名，学号等，以便我们何时您的真实身份），同时我们保证您的信息不会被泄漏。"
+              li "无关信息，方便我们了解您，同时对您进行审核（包括Github的账号）。"
+              li "特殊说明（选），如果您有特殊需求，可以在此选填。"
+            "我们会在收到邮件之后为您审核，由于目前处于测试状态，审核速度将变得不定。"
+          p "注册账户的目的"
+          p "注册账户的目的主要是向 XHSK－Hackage 中上传包。而如何制作包请查阅互联网。"
+          h4 "上传 包"
+          p "上传一个使用Cabal的包到XHSK-Hackage,需要做如下几件事。"
+          ul $ do
+            li "使用 cabal 对已经写好的包使用 cabal sdist 进行分发，得到 *.tag.gz  的文件。"
+            li "使用命令 cabal update --check 对其进行检查，查看是否符合要求。"
+            li "使用 cabal update 或到 XHSK－Hackage 上的 Upload 中上传。且两者均需要用户名和密码。"
+
+
       donateGuide :: Maybe [(String,String)]
       donateGuide = Just [
           ("forus","捐款"),
@@ -144,7 +176,10 @@ module Pages
             "目前我们正处于测试阶段，同步的频率不定。我们直接从 "
             a ! href "http://hackage.haskell.org" $ "hackage.haskell.org"
             " 同步。"
-
+          h4 $ do
+            "更多的信息请"
+            a ! href "/document#xhskhackage" $ "访问这里"
+            "。"
         hr
         h3 $ a ! name "about" $"其他"
         div $ do
