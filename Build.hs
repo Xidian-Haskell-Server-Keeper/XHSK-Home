@@ -17,7 +17,6 @@ import System.IO.Extra(writeFileUTF8)
 
 import Data.Time
 import Control.Monad
-import Text.Blaze.Html.Renderer.String(renderHtml)
 
 
 
@@ -107,6 +106,7 @@ unixMain arg = do
       waitIt aim
       stopIt
       startIt
+    Test -> testIt
     _ -> undefined
   where
     gitPull = do
@@ -132,9 +132,22 @@ unixMain arg = do
       writeFileUTF8 "./.maintain.plan" "正常运行"
     stopIt = do
       putStrLn "Ready to Stop"
-      (_,_,_,sstop) <- createProcess $ shell "pidof XHSK-Home.Bin | xargs kill -s 2"
+      (_,_,_,sstop) <- createProcess $ shell "pidof XHSK-Home.Bin | xargs kill"
       waitForProcess sstop
       return ()
     waitIt wait = do
       cur <- getCurrentTime
       when (wait > cur) $ waitIt wait
+    testIt = do
+      setCurrentDirectory ".."
+      (_,_,_,cabalinstall) <- createProcess $ shell "cabal install XHSK-Home/"
+      ciEc <- waitForProcess cabalinstall
+      case ciEc of
+        ExitSuccess -> putStrLn "编译成功"
+        _ -> error "编译错误"
+      createProcess $
+        proc "./.cabal-sandbox/bin/XHSK-Home.Bin" []
+      putStrLn "按回车，结束"
+      getLine
+      stopIt
+      putStrLn "测试结束"
