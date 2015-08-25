@@ -57,6 +57,7 @@ module Pages
           h4 "使用"
           p "在 Cabal 的 config（配置文件） 中相对 hackage.haskell.org 添加一个 基于 XHSK－Hackage 的数据即可。"
           p "之后可直接使用 cabal update 更新"
+          p "或者通过在网站上下载＊.tar.gz文件在通过 cabal－install 安装即可"
           h4 "注册账户"
           p $ do
             "注册账户的方法目前只有通过直接向"
