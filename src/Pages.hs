@@ -32,7 +32,7 @@ module Pages
       documentGuide :: Maybe[(String,String)]
       documentGuide =  Just [
         ("ghc","GHC"),
-        ("xhskhackage","XHSK-Hackage=")
+        ("xhskhackage","XHSK-Hackage")
         ]
 
       documentPage :: Html

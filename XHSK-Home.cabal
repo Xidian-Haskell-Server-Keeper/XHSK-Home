@@ -41,3 +41,4 @@ executable           XHSK-Home.Bin
                      , extra
                      , old-time
   hs-source-dirs:    src
+  ghc-options:       -threaded
