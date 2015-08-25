@@ -146,7 +146,7 @@ unixMain arg = do
         ExitSuccess -> putStrLn "编译成功"
         _ -> error "编译错误"
       createProcess $
-        proc "./.cabal-sandbox/bin/XHSK-Home.Bin" []
+        proc "./.cabal-sandbox/bin/XHSK-Home.Bin" ["+RTS","-s"]
       putStrLn "按回车，结束"
       getLine
       stopIt
