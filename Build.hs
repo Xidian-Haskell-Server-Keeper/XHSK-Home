@@ -132,7 +132,7 @@ unixMain arg = do
       writeFileUTF8 "./.maintain.plan" "正常运行"
     stopIt = do
       putStrLn "Ready to Stop"
-      (_,_,_,sstop) <- createProcess $ shell "pidof XHSK-Home.Bin | xargs kill"
+      (_,_,_,sstop) <- createProcess $ shell "pidof XHSK-Home.Bin | xargs kill -s 2"
       waitForProcess sstop
       return ()
     waitIt wait = do

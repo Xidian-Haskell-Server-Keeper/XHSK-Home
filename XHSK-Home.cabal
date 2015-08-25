@@ -40,5 +40,6 @@ executable           XHSK-Home.Bin
                      , directory
                      , extra
                      , old-time
+                     , process
   hs-source-dirs:    src
   ghc-options:       -threaded
