@@ -48,7 +48,8 @@ module Frame
       pagesLinks = [
           ("/","首页"),
           ("/document","文档"),
-          ("/donate","捐助")
+          ("/donate","捐助"),
+          ("/loint","端点录")
         ]
 
       pageFrame :: Title                     -- title
