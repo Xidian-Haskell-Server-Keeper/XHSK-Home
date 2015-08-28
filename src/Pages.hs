@@ -2,19 +2,19 @@
 
 module Pages
     (
-    homeGuide,
-    homePage,
-    documentPage,
-    documentGuide,
-    donatePage,
-    donateGuide,
-    nullPage
+    homeGuide,homePage,
+    documentPage,documentGuide,
+    donatePage,donateGuide,
+    nullPage,
+    lointPage
     ) where
 
       import Prelude hiding (div)
 
       import Frame()
-      import Text.Blaze.Html((!))
+      import Loint(sortLoint,lointData)
+
+      import Text.Blaze.Html((!),toHtml)
       import Text.Blaze.Internal(string,stringValue)
       import Text.Blaze.Html5(
           Html,hr,p,a,ul,li,h1,h2,h3,h4,div
@@ -23,6 +23,9 @@ module Pages
           name,href
         )
 
+
+      lointPage :: Html
+      lointPage = mconcat $ map toHtml $ sortLoint lointData
 
       nullPage :: Html
       nullPage = do

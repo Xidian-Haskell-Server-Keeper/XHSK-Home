@@ -17,7 +17,8 @@ module Main
 				homeGuide,homePage,
 				documentPage,documentGuide,
 				donatePage,donateGuide,
-				nullPage
+				nullPage,
+				lointPage
 			)
 
 		docsLink :: FilePath -> FilePath
@@ -61,6 +62,11 @@ module Main
 					(Title "捐助" "DONATE!" "DONATE!")
 					donateGuide
 					donatePage
+					webStatus
+				get "/loint" $ pageFrame
+					(Title "端点录" "Loint" "LOINT")
+					Nothing
+					lointPage
 					webStatus
 				get "/site-status" $ file "./.maintain.plan"
 				get (regex "^/docs(.*)") $ do
