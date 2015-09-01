@@ -1,3 +1,4 @@
+
 {-# LANGUAGE OverloadedStrings #-}
 
 module Pages
@@ -13,6 +14,7 @@ module Pages
 
       import Frame()
       import Loint(sortLoint,lointData)
+      import UnSafe(hackageUrl)
 
       import Text.Blaze.Html((!),toHtml)
       import Text.Blaze.Internal(string,stringValue)
@@ -142,8 +144,8 @@ module Pages
             ("hackage","Hackage"),
             ("about","其他")
           ]
-      homePage :: String -> Html
-      homePage hackagUrl = do
+      homePage :: Html
+      homePage = do
         h3 $ a ! name "info" $  "简介"
         div $ do
           p $  do
@@ -163,10 +165,10 @@ module Pages
           h4 "使用Hackage"
           p $ do
             "Hackage 的网址："
-            a ! href (stringValue hackagUrl) $ "Hackage-Server"
+            a ! href (stringValue hackageUrl) $ "Hackage-Server"
           p $ do
             "使用方法：在 cabal 的 config 配置文件中加入"
-            string $ "remote-repo: XHSK-Hackage:" ++ hackagUrl
+            string $ "remote-repo: XHSK-Hackage:" ++ hackageUrl
             " 即可。执行 cabal update 既可以从站点获取你想要的了。"
           h4 "上传"
           p $ do
