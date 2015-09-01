@@ -42,16 +42,11 @@ module Main
 		main = do
 			getCurrentDirectory >>= putStrLn
 			putStrLn "XHSK-Home begin!"
-			--for Hackage
-			configData <- getDataFromFile "./.xhsk.home.config"
-			let hackageUrl = case getData configData pickerData "hackag-url" of
-				Just x -> x
-				Nothing -> error "fail to read hackage-url"
 			scotty 3000 $ do
 				get "/" $ pageFrame
 					(Title "西电Hackage镜像站维护组主页" "XHSK-Home" "XHSK-Home")
 					homeGuide
-					(homePage hackageUrl)
+					homePage
 					webStatus
 				get "/document" $ pageFrame
 					(Title "文档" "Documents" "Documents")

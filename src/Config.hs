@@ -16,7 +16,8 @@ module Config
 
       pickerData :: [ConfigPicker]
       pickerData = [
-        Picker "hackag-url" 1
+        Picker "hackage-url" 1,
+        Picker "XHSK-Home" 2
         ]
 
       getLineFromPicker :: [ConfigPicker] -> String -> Maybe Integer
