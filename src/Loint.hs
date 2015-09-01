@@ -11,8 +11,8 @@ module Loint
       import Prelude hiding (div)
       import Text.Blaze(ToMarkup(..),string,stringValue)
       import Text.Blaze.Html((!),Html)
-      import Text.Blaze.Html5(a,h3,div)
-      import Text.Blaze.Html5.Attributes(name,href)
+      import Text.Blaze.Html5(a,h3,div,img,p)
+      import Text.Blaze.Html5.Attributes(name,href,src,alt)
       import UnSafe(hackageUrl,getUrlFromData)
 
 
@@ -44,7 +44,13 @@ module Loint
             a ! href "http://www.haskell.org" $ "Haskell"
             "语言 使用"
             a ! href "https://github.com/scotty-web/scotty" $ "Scotty"
-            "框架编写成的。"
+            "框架编写成的。",
+          Loint 4 "Repo" $ do
+            a ! href "https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home" $ "GitHub 上的Repo"
+            -- <a href=''><img src='' alt='Coverage Status' /></a>
+            p $ a ! href "https://coveralls.io/github/Xidian-Haskell-Server-Keeper/XHSK-Home?branch=master" $
+              img ! src "https://coveralls.io/repos/Xidian-Haskell-Server-Keeper/XHSK-Home/badge.svg?branch=master&service=github"
+                  ! alt "Coverage Status"
         ]
 
 
