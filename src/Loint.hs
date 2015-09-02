@@ -36,7 +36,7 @@ module Loint
           Loint 0 (getSvgLinked (getUrlFromData "XHSK-Home") "XHSKHome") $ do
             a ! href (stringValue $ getUrlFromData "XHSK-Home") $ "XHSK"
             " 是 Xidian Haskell(Hackage) Server Keeper 的简写。\n目前还在筹备中。",
-          Loint 1 (getSvgLinked (getUrlFromData hackageUrl) "XHSKHackage") $ do
+          Loint 1 (getSvgLinked hackageUrl "XHSKHackage") $ do
             a ! href (stringValue hackageUrl) $ "XHSK-Hackage"
             " 是 XHSK 架设于西电校内的 Hackage。",
           Loint 2 "Email:qinka@live.com" $ do
