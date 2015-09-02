@@ -21,6 +21,9 @@ module Main
 				lointPage
 			)
 
+		import SvgImg
+		import Utils
+
 		docsLink :: FilePath -> FilePath
 		docsLink v = "./XHSK-Doc" ++ v
 		webStatusIO :: IO (Maybe String)
@@ -64,6 +67,11 @@ module Main
 					lointPage
 					webStatus
 				get "/site-status" $ file "./.maintain.plan"
+				--logo
+				get "/site-status/d04f22c10b926df403ded5aca2668ad4/:arg" $ do
+					filename <- param "arg"
+					setHeader "Content-Type" "image/svg+xml"
+					file $ "./statusLogo/" ++ filename ++ ".svg"
 				get (regex "^/docs(.*)") $ do
    					cap <- param "1"
    					file $ docsLink cap
