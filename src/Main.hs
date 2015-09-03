@@ -66,7 +66,9 @@ module Main
 					Nothing
 					lointPage
 					webStatus
-				get "/site-status" $ file "./.maintain.plan"
+				get "/site-status" $ do
+					setHeader "Content-Type" "text/plain"
+					file "./.maintain.plan"
 				--logo
 				get "/site-status/d04f22c10b926df403ded5aca2668ad4/:arg" $ do
 					filename <- param "arg"

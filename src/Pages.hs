@@ -13,7 +13,7 @@ module Pages
       import Prelude hiding (div)
 
       import Frame()
-      import Loint(sortLoint,lointData)
+      import Loint(sortLoint,lointData,addLointLink)
       import UnSafe(hackageUrl)
 
       import Text.Blaze.Html((!),toHtml)
@@ -60,9 +60,12 @@ module Pages
         h3 $ a ! name "xhskhackage" $ "XHSK-Hackage"
         div $ do
           h4 "使用"
-          p "在 Cabal 的 config（配置文件） 中相对 hackage.haskell.org 添加一个 基于 XHSK－Hackage 的数据即可。"
-          p "之后可直接使用 cabal update 更新"
-          p "或者通过在网站上下载＊.tar.gz文件在通过 cabal－install 安装即可"
+          p $ do
+            "在 Cabal 的 config（配置文件） 中相对 hackage.haskell.org 添加一个 基于 XHSK－Hackage 的数据即可。"
+            "添加类似：remote-repo: XHSK-Hackage:http://xhsk-hackage-url/packages/archive"
+          p $ do
+            "之后可直接使用 cabal update，更新。"
+            "或者通过在网站上下载＊.tar.gz文件在通过 cabal-install 安装即可"
           h4 "注册账户"
           p $ do
             "注册账户的方法目前只有通过直接向"
@@ -80,7 +83,10 @@ module Pages
           p "注册账户的目的"
           p "注册账户的目的主要是向 XHSK－Hackage 中上传包。而如何制作包请查阅互联网。"
           h4 "上传 包"
-          p "上传一个使用Cabal的包到XHSK-Hackage,需要做如下几件事。"
+          p $ do
+            "上传一个使用Cabal的包到XHSK-Hackage,需要做如下几件事。"
+            "注"
+            addLointLink 4
           ul $ do
             li "使用 cabal 对已经写好的包使用 cabal sdist 进行分发，得到 *.tag.gz  的文件。"
             li "使用命令 cabal update --check 对其进行检查，查看是否符合要求。"
@@ -153,20 +159,30 @@ module Pages
             "意在为校内师生于校外同志提供一些与Haskell有关的服务，"
             "同时尝试为校内师生提供一些学习Haskell的资料。"
           p $ do
-            "XHSK，也就是西电Hackage维护社团目前隶属于西安电子科技大学软件学院141301401班团支部。"
-            "创建人"
-            a ! href "mailto:qinka@live.com" $ "李约瀚"
-            "。同时我们也接受"
+            "同时我们也接受"
             a ! href "/donate" $ "捐助"
             "。"
+          p $ do
+            "更多参见"
+            addLointLink 0
         hr
         h3 $ a ! name "hackage" $"Hackage"
         div $ do
           h4 "使用Hackage"
           p $ do
-            "Hackage 的网址："
-            a ! href (stringValue hackageUrl) $ "Hackage-Server"
+            "XHSK-Hackage 是"
+            a ! href "http://hackage.haskell.org" $ "Hackage"
+            "的镜像。是Haskell中不可缺少的一部分。Haskell 编写成的绝大部分软体、程序与库，都是通过 Hackage 分发给世界各地的用户。"
           p $ do
+            "Hackage 的分发是直接分发代码，并通过 Cabal 装。"
+          p $ do
+            "XHSK-Hackage 的网址："
+            a ! href (stringValue hackageUrl) $ "XHSK-Hackage"
+          h4 $ do
+            "更多的信息请"
+            a ! href "/document#xhskhackage" $ "访问这里"
+            "。"
+          {-p $ do
             "使用方法：在 cabal 的 config 配置文件中加入"
             string $ "remote-repo: XHSK-Hackage:" ++ hackageUrl
             " 即可。执行 cabal update 既可以从站点获取你想要的了。"
@@ -181,19 +197,11 @@ module Pages
           p $ do
             "目前我们正处于测试阶段，同步的频率不定。我们直接从 "
             a ! href "http://hackage.haskell.org" $ "hackage.haskell.org"
-            " 同步。"
-          h4 $ do
-            "更多的信息请"
-            a ! href "/document#xhskhackage" $ "访问这里"
-            "。"
+            " 同步。"-}
         hr
         h3 $ a ! name "about" $"其他"
         div $ do
           "Copyright (C) 2015 XHSK"
-          p "This website is written in Haskell."
-          p "这个网站用Haskell编写。"
           p $ do
-            "网站代码依托关于GitHub  "
-            a ! href "https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home" $
-              "Repo : XHSK-Home"
-            "。"
+            "其他详见"
+            addLointLink 3
