@@ -86,7 +86,7 @@ module Pages
           p $ do
             "上传一个使用Cabal的包到XHSK-Hackage,需要做如下几件事。"
             "注"
-            addLointLink 4
+            addLointLink "hackageUpload"
           ul $ do
             li "使用 cabal 对已经写好的包使用 cabal sdist 进行分发，得到 *.tag.gz  的文件。"
             li "使用命令 cabal update --check 对其进行检查，查看是否符合要求。"
@@ -164,7 +164,7 @@ module Pages
             "。"
           p $ do
             "更多参见"
-            addLointLink 0
+            addLointLink "xhskhome"
         hr
         h3 $ a ! name "hackage" $"Hackage"
         div $ do
@@ -182,26 +182,10 @@ module Pages
             "更多的信息请"
             a ! href "/document#xhskhackage" $ "访问这里"
             "。"
-          {-p $ do
-            "使用方法：在 cabal 的 config 配置文件中加入"
-            string $ "remote-repo: XHSK-Hackage:" ++ hackageUrl
-            " 即可。执行 cabal update 既可以从站点获取你想要的了。"
-          h4 "上传"
-          p $ do
-            "首先需要的是一个账户，需要向"
-            a ! href "mailto:qinka@live.com?subject=XHSK-Hackage%20上传账户申请&body=%0dXHSK-Hackage账户申请%0d申请账户名：%0d申请密码%0d联系邮箱："
-              $ "qinka@live.com"
-            "提交申请，最好在最后附上您所在的学院、专业、班级，同时附加上你的QQ号。"
-            "您在发出邮件之后我们会尽快为您处理，无论您是否通过，都会收到我们的回复通知。"
-          h4 "镜像同步"
-          p $ do
-            "目前我们正处于测试阶段，同步的频率不定。我们直接从 "
-            a ! href "http://hackage.haskell.org" $ "hackage.haskell.org"
-            " 同步。"-}
         hr
         h3 $ a ! name "about" $"其他"
         div $ do
           "Copyright (C) 2015 XHSK"
           p $ do
             "其他详见"
-            addLointLink 3
+            addLointLink "dev"
