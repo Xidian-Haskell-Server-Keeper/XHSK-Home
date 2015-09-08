@@ -44,10 +44,10 @@ module Loint
 
       indexLoint :: Num a => Integer -> LointList a -> LointList Integer
       indexLoint _ [] = []
-      indexLoint i (Loint _ tag title text :xs) = (Loint i tag title text) : (indexLoint (i+1) xs)
+      indexLoint i (Loint _ tag title text :xs) = Loint i tag title text : indexLoint (i+1) xs
 
       lointData :: LointList Integer
-      lointData = indexLoint 0 $ sortLoint $ datas
+      lointData = indexLoint 0 $ sortLoint  datas
         where
           datas = [
             Loint 0 "xhskhome" (getSvgLinked (getUrlFromData "XHSK-Home") "XHSKHome") $ do
@@ -99,11 +99,11 @@ module Loint
 
 
       instance (Show a ,ToMarkup a)=> ToMarkup (Loint a) where
-        toMarkup (Loint id tag title str) = div $ do
+        toMarkup (Loint id _ title str) = div $ do
             h3 $ a ! name (stringValue numStr) $ do
               "== Loint[" :: Html
               toHtml id
-              "] == "
+              "] == " ::Html
               title
             str
           where

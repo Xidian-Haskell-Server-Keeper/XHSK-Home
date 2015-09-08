@@ -18,13 +18,15 @@ module Frame
       import Text.Blaze.Html4.FrameSet.Attributes(frameborder)
       import Text.Blaze.Html4.Transitional.Attributes (align)
       import Text.Blaze.Html5(
-          Html,hr,p,b,head,title,meta,header,
-          nav,a,body,h1,h2,h3,div,ul,li,img,
+          Html,hr,p,head,title,meta,header,
+          nav,a,body,h1,h2,h3,div,ul,li,
           iframe,br
         )
       import Text.Blaze.Html5.Attributes(
           href,name,content,name,src,height,width,charset
         )
+      import Control.Arrow(first)
+      import Control.Monad(when)
 
 
       data Title = Title String String String
@@ -58,7 +60,7 @@ module Frame
              -> Bool             -- 网站 状态 提示
              -> ActionM ()
 
-      pageFrame  t@(Title cnT enT webT) g mainPart info = blaze $ do
+      pageFrame  (Title cnT enT webT) g mainPart info = blaze $ do
         head $ do
           metasettings
           title $ string webT
@@ -79,16 +81,12 @@ module Frame
             Nothing -> ""
             Just g' -> do
               h3 $ a ! name "guide" $ "目录"
-              ul $ do
-                mconcat $
-                  map (li.makeLink.
-                      (\(urlLink,display) -> ('#':urlLink,display))
+              ul $ mconcat $
+                  map (li.makeLink.first ((:) '#')
                     ) g'
               hr
           mainPart
-          case info of
-            False -> ""
-            True -> do
+          when info $ do
               hr
               "网站状态（出现乱码，请尝试刷新）："
               br

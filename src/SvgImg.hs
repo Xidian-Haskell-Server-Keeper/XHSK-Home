@@ -12,6 +12,9 @@ module SvgImg
     eval
     ) where
 
+      import Utils(blazeSvg)
+
+      import Web.Scotty(ActionM)
 
       import Text.Blaze(AttributeValue,stringValue,ToMarkup)
       import Text.Blaze.Html(Html,(!))
@@ -47,10 +50,10 @@ module SvgImg
                       (a,b) -> (a,b) -> Maybe String -> Maybe String -> Maybe String -> SvgShields a b
 
       instance (Read a,Read b) => Read (SvgShields a b) where
+        readsPrec = error "no!!!!!!!!!!!!"
 
-
-      eval :: Text -> Svg
-      eval url= case ssData of
+      eval' :: Text -> Svg
+      eval' url= case ssData of
         PlasticStyle (l,lp) (r,rp) cA cB ->
           plasticStyle (l,lp) (r,rp) cA cB
         FlatStyle (l,lp) (r,rp) cA cB ->
@@ -60,7 +63,16 @@ module SvgImg
         SocialStyle (l,lp) (r,rp) cA cB u ->
           socialStyle (l,lp) (r,rp) cA cB u
         where
-          ssData = (read url') ::SvgShields Double Double
+          ssData = read url' ::SvgShields Double Double
           url' = unpack url
+      eval :: Text -> ActionM ()
+      eval = blazeSvg . eval'
 
--- d04f22c10b926df403ded5aca2668ad4 -- svgimg's md5
+{-
+$ md5
+SvgShields
+ea79ac5f8cb5d58613cbfa9cbd451096
+
+
+d04f22c10b926df403ded5aca2668ad4 -- svgimg's md5
+-}

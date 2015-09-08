@@ -47,10 +47,10 @@ module Config
       getDataFromFileStep :: [String] -> Integer -> [ConfigData]
       getDataFromFileStep [] _ = []
       getDataFromFileStep (x:xs) i
-        | note x =  (Data i x):getDataFromFileStep xs  (1+i)
+        | note x =  Data i x:getDataFromFileStep xs  (1+i)
         | otherwise = getDataFromFileStep xs $ 1+i
         where
-          note (x:y:zs)
-            | x==y && y=='-' =False
+          note (xx:yy:_)
+            | xx==yy && yy=='-' =False
             | otherwise = True
-          note x = True
+          note _ = True

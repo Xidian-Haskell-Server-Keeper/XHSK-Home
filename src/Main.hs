@@ -6,11 +6,7 @@ module Main
 	) where
 
 		import Web.Scotty
-		import qualified Data.Text as T
 		import System.Directory(getCurrentDirectory,doesFileExist)
-		--import System.IO.Unsafe
-		import Config(pickerData,getDataFromFile,getData)
-		import Data.Text.Lazy(pack)
 
 		import Frame(pageFrame,Title(..))
 		import Pages(
@@ -21,20 +17,11 @@ module Main
 				lointPage
 			)
 
-		import SvgImg
-		import Utils
+		import SvgImg(eval)
+		import Utils()
 
 		docsLink :: FilePath -> FilePath
 		docsLink v = "./XHSK-Doc" ++ v
-		webStatusIO :: IO (Maybe String)
-		webStatusIO = do
-			is <- doesFileExist "./.maintain.plan"
-			case is of
-				True -> do
-					toMaybe <$> readFile "./.maintain.plan"
-				False -> return Nothing
-			where
-				toMaybe = Just
 
 		webStatus :: Bool
 		webStatus = True
@@ -77,9 +64,20 @@ module Main
 				get (regex "^/docs(.*)") $ do
    					cap <- param "1"
    					file $ docsLink cap
+				get "/e8b32bc4d7b564ac6075a1418ad8841e/ea79ac5f8cb5d58613cbfa9cbd451096/:svgarg" $ do
+					svgArg <- param "svgarg"
+					setHeader "Content-Type" "image/svg+xml"
+					eval svgArg
 				notFound $ pageFrame
 					(Title "404" "访问页面无法找到。" "404")
 					Nothing
 					nullPage
 					webStatus
 			putStrLn "XHSK-Home end !"
+
+{-
+$ md5
+server
+e8b32bc4d7b564ac6075a1418ad8841e
+
+-}

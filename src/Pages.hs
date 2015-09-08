@@ -1,4 +1,3 @@
-
 {-# LANGUAGE OverloadedStrings #-}
 
 module Pages
@@ -17,7 +16,7 @@ module Pages
       import UnSafe(hackageUrl)
 
       import Text.Blaze.Html((!),toHtml)
-      import Text.Blaze.Internal(string,stringValue)
+      import Text.Blaze.Internal(stringValue)
       import Text.Blaze.Html5(
           Html,hr,p,a,ul,li,h1,h2,h3,h4,div
         )
@@ -142,7 +141,7 @@ module Pages
         hr
         h3 $ a ! name "supervise" $ "监督我们"
         div $ do
-          "我们将定期公开受捐赠的详细信息（不会再未经许可的情况下透漏个人信息）。公开方式待定。"
+          p "我们将定期公开受捐赠的详细信息（不会再未经许可的情况下透漏个人信息）。公开方式待定。"
 
       homeGuide :: Maybe [(String,String)]
       homeGuide = Just [
@@ -173,8 +172,7 @@ module Pages
             "XHSK-Hackage 是"
             a ! href "http://hackage.haskell.org" $ "Hackage"
             "的镜像。是Haskell中不可缺少的一部分。Haskell 编写成的绝大部分软体、程序与库，都是通过 Hackage 分发给世界各地的用户。"
-          p $ do
-            "Hackage 的分发是直接分发代码，并通过 Cabal 装。"
+          p "Hackage 的分发是直接分发代码，并通过 Cabal 装。"
           p $ do
             "XHSK-Hackage 的网址："
             a ! href (stringValue hackageUrl) $ "XHSK-Hackage"
