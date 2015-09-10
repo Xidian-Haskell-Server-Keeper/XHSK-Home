@@ -1,8 +1,10 @@
 #!/usr/local/bin/runghc
 
 
+{-# OPTIONS_GHC -Wall #-}
 {-# LANGUAGE Trustworthy #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+
 
 
 module Build where
@@ -21,9 +23,10 @@ import Control.Monad
 
 
 
-
+cabal :: [String] -> IO ()
 cabal = defaultMainArgs
-data OS = Windows | Linux deriving (Show)
+
+data OS = Windows | Linux | FinalSite deriving (Show)
 instance Read OS where
   readsPrec _ s =
         case s of
@@ -31,6 +34,12 @@ instance Read OS where
           "Linux" -> [(Linux,"")]
           "windows"  -> [(Windows,"")]
           "linux" -> [(Linux,"")]
+          "Final" -> [(FinalSite,"")]
+          "final" -> [(FinalSite,"")]
+          "FinalSite" -> [(FinalSite,"")]
+          "Finalsite" -> [(FinalSite,"")]
+          "finalsite" -> [(FinalSite,"")]
+          "finalSite" -> [(FinalSite,"")]
 
 data Run = Start | Stop | Restart | Test deriving (Show)
 instance Read Run where
@@ -45,8 +54,8 @@ instance Read Run where
           "restart"->[(Restart,"")]
           "test"->[(Test,"")]
 
-maintain :: IO () -> IO () -> IO ()
-maintain w u = do
+maintain :: [IO ()]-> IO ()
+maintain [w,u,f] = do
   putStrLn "XHSK-Home 维护"
   x <- readFile "./info"
   let xx = head $ lines x
@@ -54,15 +63,33 @@ maintain w u = do
   case  flag of
     Linux -> u
     Windows -> w
+    FinalSite -> f
     _ -> undefined
 
-
+main :: IO ()
 main = do
   args <- getArgs
-  if null args || head args == "help" then help else maintain (windowsMain $ head args) (unixMain $ head args)
+  if null args || head args == "help" then help else maintain [windowsMain $ head args,unixMain $ head args]
   where
     help = do
       putStrLn "XHSK-Home 维护"
+      x <- readFile "./info"
+      let platform = read $ head $ lines x ::OS
+      case platform of
+        Linux -> undefined
+        Windows -> undefined
+        FinalSite -> undefined
+
+
+--------------------------Help-Infomation----------------------------
+
+
+helpOfLinux ::[String]
+helpOfWindows ::[String]
+helpOfFinalSite ::[String]
+
+
+--------------------------Windows-(Only Test)------------------------
 
 windowsMain :: String -> IO ()
 windowsMain arg = do
@@ -70,7 +97,7 @@ windowsMain arg = do
   case flag of
     Test -> do
       setCurrentDirectory ".."
-      (_,_,_,cabalinstall) <- createProcess $ shell "cabal install XHSK-Home/"
+      (_,_,_,cabalinstall) <- createProcess $ shell "cabal install XHSK-Home\\"
       ciEc <- waitForProcess cabalinstall
       case ciEc of
         ExitSuccess -> putStrLn "编译成功"
@@ -85,6 +112,9 @@ windowsMain arg = do
       waitForProcess kill
       putStrLn "测试结束"
     _ -> undefined
+
+--------------------Unix-Like--------------------
+
 unixMain :: String -> IO ()
 unixMain arg = do
   let flag = read arg :: Run
@@ -97,7 +127,7 @@ unixMain arg = do
     Stop -> stopIt
     Restart -> do
       (_:aim':_) <- getArgs
-      let aim = (read (head $ lines aim') ::UTCTime)
+      let aim = read (head $ lines aim') ::UTCTime
       localTimeZone <- getTimeZone aim
       let localTime = utcToLocalTime localTimeZone aim
       writeFileUTF8 "../.maintain.plan" $ (++) "本站即将进入维护，预计维护时间：" $ show localTime
@@ -151,3 +181,5 @@ unixMain arg = do
       getLine
       stopIt
       putStrLn "测试结束"
+
+---------------FinalSite------------------

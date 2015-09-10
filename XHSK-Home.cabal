@@ -1,5 +1,5 @@
 name:                XHSK-Home
-version:             0.0.85.20
+version:             0.0.85.22
 synopsis:            Xidian Hackage Server Keeper
 description:         The home of XHSK
 homepage:            https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home
@@ -17,6 +17,7 @@ executable           XHSK-Home.Bin
   default-language:    Haskell2010
   -- other-modules:
   build-depends:       base
+                     , Cabal
                      , wai
                      , warp
                      , http-types
