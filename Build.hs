@@ -69,7 +69,7 @@ maintain [w,u,f] = do
 main :: IO ()
 main = do
   args <- getArgs
-  if null args || head args == "help" then help else maintain [windowsMain $ head args,unixMain $ head args]
+  if null args || head args == "help" then help else maintain [windowsMain $ head args,unixMain $ head args,putStrLn ":("]
   where
     help = do
       putStrLn "XHSK-Home 维护"
@@ -84,9 +84,10 @@ main = do
 --------------------------Help-Infomation----------------------------
 
 
-helpOfLinux ::[String]
-helpOfWindows ::[String]
-helpOfFinalSite ::[String]
+helpOfLinux,helpOfFinalSite,helpOfWindows ::[String]
+helpOfLinux=undefined
+helpOfWindows=undefined
+helpOfFinalSite=undefined
 
 
 --------------------------Windows-(Only Test)------------------------

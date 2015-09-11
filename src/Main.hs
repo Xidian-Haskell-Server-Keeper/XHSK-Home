@@ -17,8 +17,8 @@ module Main
 				lointPage
 			)
 
-		import SvgImg(eval)
-		import Utils()
+		import Text.Blaze.Svg.Shields.Url(eval)
+		import Utils(blazeSvg)
 
 		docsLink :: FilePath -> FilePath
 		docsLink v = "./XHSK-Doc" ++ v
@@ -64,10 +64,10 @@ module Main
 				get (regex "^/docs(.*)") $ do
    					cap <- param "1"
    					file $ docsLink cap
-				get "/e8b32bc4d7b564ac6075a1418ad8841e/ea79ac5f8cb5d58613cbfa9cbd451096/:svgarg" $ do
-					svgArg <- param "svgarg"
+				get (regex "^/e8b32bc4d7b564ac6075a1418ad8841e/ea79ac5f8cb5d58613cbfa9cbd451096/(.*)") $ do
+					svgArg <- param "1"
 					setHeader "Content-Type" "image/svg+xml"
-					eval svgArg
+					blazeSvg $ eval svgArg
 				notFound $ pageFrame
 					(Title "404" "访问页面无法找到。" "404")
 					Nothing

@@ -14,6 +14,7 @@ module Loint
       import Text.Blaze.Html((!),Html,toHtml)
       import Text.Blaze.Html5(a,h3,div,img,p)
       import Text.Blaze.Html5.Attributes(name,href,src,alt)
+      import Text.Blaze.Svg.Shields.Url
 
       import SvgImg(getSvgLinked,getSvgPath)
       import UnSafe(hackageUrl,getUrlFromData)
@@ -71,7 +72,7 @@ module Loint
             Loint 0.1 "dev" "开发与Repo信息" $
               div $
                 p $ do
-                  img ! src (getSvgPath "static")
+                  img ! src (getSvgPath (PlasticStyle ("Website",43) ("Static",32) Nothing Nothing ::SvgShields String Double))
                   " "
                   getSvgLinked "http://www.haskell.org" "LanguageHaskell"
                   " "
