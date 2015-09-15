@@ -20,7 +20,7 @@ module Frame
       import Text.Blaze.Html5(
           Html,hr,p,head,title,meta,header,
           nav,a,body,h1,h2,h3,div,ul,li,
-          iframe,br
+          iframe,br,img
         )
       import Text.Blaze.Html5.Attributes(
           href,name,content,name,src,height,width,charset
@@ -54,10 +54,10 @@ module Frame
           ("/loint","端点录")
         ]
 
-      pageFrame :: Title                     -- title
+      pageFrame :: Title                  -- title
              -> Maybe [(String,String)]   -- Guide
              -> Html                      -- 网页内部
-             -> Bool             -- 网站 状态 提示
+             -> Bool                      -- 网站 状态 提示
              -> ActionM ()
 
       pageFrame  (Title cnT enT webT) g mainPart info = blaze $ do
@@ -90,11 +90,6 @@ module Frame
               hr
               "网站状态（出现乱码，请尝试刷新）："
               br
-              iframe ! src "/site-status"
-                     ! align "middle"
-                     ! frameborder "0"
-                     ! width "100%"
-                     ! height "40"
-                     $ "更换浏览器"
+              img ! src "/1cc4c59cedaa83ed1e944f95bfbcc05f/d04f22c10b926df403ded5aca2668ad4/site-status"
           hr
           p ! align "right" $ "Powered by Scotty · Copyright 2015 XHSK"

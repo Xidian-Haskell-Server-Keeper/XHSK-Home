@@ -5,8 +5,8 @@
 
 module SvgImg
     (
-    getSvgPath,
-    getSvgLinked,
+    getSvgPath,getSvgLinked,
+    xhskHome,languageHaskell,frameScotty,xhskHackage,repo,static,licenseBSD
     ) where
 
 
@@ -15,17 +15,38 @@ module SvgImg
       import Text.Blaze.Html(Html,(!))
       import Text.Blaze.Html5(a,img)
       import Text.Blaze.Html5.Attributes(href,src)
-      import Text.Blaze.Svg.Shields.Url(SvgShields)
+      import Text.Blaze.Svg.Shields.Url
 
 
       getSvgPath :: (Show a,ToMarkup a,Read a,Show b,Floating b,Read b) => SvgShields a b  -> AttributeValue
       getSvgPath x = stringValue $ ("/e8b32bc4d7b564ac6075a1418ad8841e/ea79ac5f8cb5d58613cbfa9cbd451096/"++) $ show x
 
 
-      getSvgLinked :: String -> String -> Html
-      getSvgLinked x y =
+      getSvgLinked ::(Show a,ToMarkup a,Read a,Show b,Floating b,Read b) => Maybe String -> SvgShields a b -> Html
+      getSvgLinked Nothing y =
+        a  $
+          img ! src (getSvgPath y)
+
+      getSvgLinked (Just x) y =
         a ! href (stringValue x) $
-          img ! src (stringValue y) --(getSvgPath y)
+          img ! src (getSvgPath y)
+
+
+
+
+      xhskHome,languageHaskell,frameScotty,xhskHackage,repo,static,licenseBSD:: SvgShields String Double
+
+      xhskHome = FlatSquareStyle ("XHSK",30) ("Home",33) Nothing $ Just "#007ec6"
+      languageHaskell = PlasticStyle ("Language",53) ("Haskell",39) Nothing $ Just "#fe7d37"
+      frameScotty = PlasticStyle ("Frame",34) ("Scotty",36) Nothing $ Just "#ff69b4"
+      xhskHackage = FlatSquareStyle ("XHSK",30) ("Hackage",47) Nothing $ Just "#007ec6"
+      licenseBSD = FlatStyle ("license",40) ("BSD3",30) Nothing $ Just "#9f9f9f"
+      static = FlatStyle ("Website",43) ("static",32) Nothing $ Just "#dfb317"
+      repo = SocialStyle ("fork",20) ("star",20) Nothing Nothing Nothing
+
+
+
+
 
     {-  data SvgShields a b  where
         PlasticStyle ::(Show a,ToMarkup a,Read a,Show b,Floating b,Read b) =>

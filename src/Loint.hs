@@ -16,7 +16,7 @@ module Loint
       import Text.Blaze.Html5.Attributes(name,href,src,alt)
       import Text.Blaze.Svg.Shields.Url
 
-      import SvgImg(getSvgLinked,getSvgPath)
+      import SvgImg(getSvgLinked,getSvgPath,xhskHome,languageHaskell,frameScotty,xhskHackage,repo,static,licenseBSD)
       import UnSafe(hackageUrl,getUrlFromData)
 
 
@@ -51,7 +51,7 @@ module Loint
       lointData = indexLoint 0 $ sortLoint  datas
         where
           datas = [
-            Loint 0 "xhskhome" (getSvgLinked (getUrlFromData "XHSK-Home") "XHSKHome") $ do
+            Loint 0 "xhskhome" (getSvgLinked Nothing xhskHome) $ do
               p $ do
                 a ! href (stringValue $ getUrlFromData "XHSK-Home") $ "XHSK"
                 " 是 Xidian Haskell(Hackage) Server Keeper 的简写。\n目前还在筹备中。"
@@ -61,7 +61,7 @@ module Loint
                 a ! href "mailto:qinka@live.com" $ "李约瀚"
                 "。"
               ,
-            Loint 1 "xhskhackage" (getSvgLinked hackageUrl "XHSKHackage") $ do
+            Loint 1 "xhskhackage" (getSvgLinked Nothing xhskHackage) $ do
               p $ a ! href (stringValue hackageUrl) $ "XHSK-Hackage"
               " 是 XHSK 架设于西电校内的 Hackage。"
               p "同步时间与次数：目前正处于测试，"
@@ -72,15 +72,15 @@ module Loint
             Loint 0.1 "dev" "开发与Repo信息" $
               div $
                 p $ do
-                  img ! src (getSvgPath (PlasticStyle ("Website",43) ("Static",32) Nothing Nothing ::SvgShields String Double))
+                  getSvgLinked Nothing static
                   " "
-                  getSvgLinked "http://www.haskell.org" "LanguageHaskell"
+                  getSvgLinked Nothing languageHaskell
                   " "
-                  getSvgLinked "https://github.com/scotty-web/scotty" "FrameScotty"
+                  getSvgLinked Nothing frameScotty
                   " "
-                  getSvgLinked "https://raw.githubusercontent.com/Xidian-Haskell-Server-Keeper/XHSK-Home/master/LICENSE" "licenseBSD"
+                  getSvgLinked Nothing licenseBSD
                   " "
-                  getSvgLinked "https://github.com/Xidian-Haskell-Server-Keeper/XHSK-Home" "repo"
+                  getSvgLinked Nothing repo
                   " "
                   a ! href "https://coveralls.io/github/Xidian-Haskell-Server-Keeper/XHSK-Home?branch=master" $
                     img ! src "https://coveralls.io/repos/Xidian-Haskell-Server-Keeper/XHSK-Home/badge.svg?branch=master&service=github"

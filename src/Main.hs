@@ -6,7 +6,7 @@ module Main
 	) where
 
 		import Web.Scotty
-		import System.Directory(getCurrentDirectory,doesFileExist)
+		import System.Directory(getCurrentDirectory,doesFileExist,setCurrentDirectory)
 
 		import Frame(pageFrame,Title(..))
 		import Pages(
@@ -57,7 +57,7 @@ module Main
 					setHeader "Content-Type" "text/plain"
 					file "./.maintain.plan"
 				--logo
-				get "/site-status/d04f22c10b926df403ded5aca2668ad4/:arg" $ do
+				get "/1cc4c59cedaa83ed1e944f95bfbcc05f/d04f22c10b926df403ded5aca2668ad4/:arg" $ do
 					filename <- param "arg"
 					setHeader "Content-Type" "image/svg+xml"
 					file $ "./statusLogo/" ++ filename ++ ".svg"
@@ -79,5 +79,9 @@ module Main
 $ md5
 server
 e8b32bc4d7b564ac6075a1418ad8841e
+
+resource
+1cc4c59cedaa83ed1e944f95bfbcc05f
+
 
 -}
