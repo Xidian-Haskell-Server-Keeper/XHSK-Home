@@ -36,12 +36,12 @@ module SvgImg
 
       xhskHome,languageHaskell,frameScotty,xhskHackage,repo,static,licenseBSD:: SvgShields String Double
 
-      xhskHome = FlatSquareStyle ("XHSK",30) ("Home",33) Nothing $ Just "#007ec6"
-      languageHaskell = PlasticStyle ("Language",53) ("Haskell",39) Nothing $ Just "#fe7d37"
-      frameScotty = PlasticStyle ("Frame",34) ("Scotty",36) Nothing $ Just "#ff69b4"
-      xhskHackage = FlatSquareStyle ("XHSK",30) ("Hackage",47) Nothing $ Just "#007ec6"
-      licenseBSD = FlatStyle ("license",40) ("BSD3",30) Nothing $ Just "#9f9f9f"
-      static = FlatStyle ("Website",43) ("static",32) Nothing $ Just "#dfb317"
+      xhskHome = FlatSquareStyle ("XHSK",30) ("Home",33) Nothing $ Just "007ec6"
+      languageHaskell = PlasticStyle ("Language",53) ("Haskell",39) Nothing $ Just "fe7d37"
+      frameScotty = PlasticStyle ("Frame",34) ("Scotty",36) Nothing $ Just "ff69b4"
+      xhskHackage = FlatSquareStyle ("XHSK",30) ("Hackage",47) Nothing $ Just "007ec6"
+      licenseBSD = FlatStyle ("license",40) ("BSD3",30) Nothing $ Just "9f9f9f"
+      static = FlatStyle ("Website",43) ("static",32) Nothing $ Just "dfb317"
       repo = SocialStyle ("fork",20) ("star",20) Nothing Nothing Nothing
 
 
