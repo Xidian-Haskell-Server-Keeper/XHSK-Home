@@ -12,12 +12,27 @@ build-type:          Simple
 cabal-version:       >=1.12
 
 
+executable          xhsk-maintain
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  hs-source-dirs:      maintain
+  build-depends:       base
+                     , Cabal
+                     , blaze-shields > 0.1.1.10
+                     , directory
+                     , extra
+                     , old-time
+                     , process
+                     , blaze-svg
+                     , time
+
+
+
 executable           XHSK-Home.Bin
   main-is:             Main.hs
   default-language:    Haskell2010
   -- other-modules:
   build-depends:       base
-                     , Cabal
                      , wai
                      , warp
                      , http-types
@@ -37,12 +52,6 @@ executable           XHSK-Home.Bin
                      , transformers
                      , wai-middleware-static
                      , wai-extra
-                     , time
                      , clay
-                     , directory
-                     , extra
-                     , old-time
-                     , process
-                     , blaze-shields >0.1.0.5
   hs-source-dirs:    src
   ghc-options:       -threaded -Wall -O2
